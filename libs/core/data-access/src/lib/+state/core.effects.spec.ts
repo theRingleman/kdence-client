@@ -6,32 +6,32 @@ import { NxModule } from '@nrwl/angular';
 import { hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
-import * as UsersActions from './users.actions';
-import { UsersEffects } from './users.effects';
+import * as CoreActions from './core.actions';
+import { CoreEffects } from './core.effects';
 
-describe('UsersEffects', () => {
+describe('CoreEffects', () => {
   let actions: Observable<Action>;
-  let effects: UsersEffects;
+  let effects: CoreEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NxModule.forRoot()],
       providers: [
-        UsersEffects,
+        CoreEffects,
         provideMockActions(() => actions),
         provideMockStore(),
       ],
     });
 
-    effects = TestBed.inject(UsersEffects);
+    effects = TestBed.inject(CoreEffects);
   });
 
   describe('init$', () => {
     it('should work', () => {
-      actions = hot('-a-|', { a: UsersActions.init() });
+      actions = hot('-a-|', { a: CoreActions.init() });
 
       const expected = hot('-a-|', {
-        a: UsersActions.loadCurrentUserSuccess({ users: [] }),
+        a: CoreActions.loadCoreSuccess({ core: [] }),
       });
 
       expect(effects.init$).toBeObservable(expected);

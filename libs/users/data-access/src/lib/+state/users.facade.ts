@@ -14,14 +14,20 @@ export class UsersFacade {
   loaded$ = this.store.pipe(select(UsersSelectors.getUsersLoaded));
   allUsers$ = this.store.pipe(select(UsersSelectors.getAllUsers));
   selectedUsers$ = this.store.pipe(select(UsersSelectors.getSelected));
+  isLoggedIn$ = this.store.pipe(select(UsersSelectors.isUserLoggedIn));
+  currentUser$ = this.store.pipe(select(UsersSelectors.getCurrentUser));
 
   constructor(private readonly store: Store) {}
 
-  /**
-   * Use the initialization action to perform one
-   * or more tasks in your Effects.
-   */
-  init() {
-    this.store.dispatch(UsersActions.init());
+  private dispatch(action: Action) {
+    this.store.dispatch(action);
+  }
+
+  logUserIn() {
+    this.store.dispatch(UsersActions.userLoggedIn());
+  }
+
+  logUserOut() {
+    this.store.dispatch(UsersActions.userLoggedOut());
   }
 }

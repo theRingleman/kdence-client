@@ -1,6 +1,56 @@
 {
   "version": 1,
   "projects": {
+    "core-constants": {
+      "projectType": "library",
+      "root": "libs/core/constants",
+      "sourceRoot": "libs/core/constants/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/constants"],
+          "options": {
+            "jestConfig": "libs/core/constants/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/constants/src/**/*.ts",
+              "libs/core/constants/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "core-data-access": {
+      "projectType": "library",
+      "root": "libs/core/data-access",
+      "sourceRoot": "libs/core/data-access/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/data-access"],
+          "options": {
+            "jestConfig": "libs/core/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/data-access/src/**/*.ts",
+              "libs/core/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "core-features": {
       "projectType": "library",
       "root": "libs/core/features",
@@ -128,7 +178,10 @@
               "apps/kdence-client/src/favicon.ico",
               "apps/kdence-client/src/assets"
             ],
-            "styles": ["node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/kdence-client/src/styles.scss"],
+            "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/kdence-client/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {

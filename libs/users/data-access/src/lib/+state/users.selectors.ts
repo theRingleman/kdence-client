@@ -34,3 +34,13 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
+
+export const getCurrentUser = createSelector(
+  getUsersState,
+  (s) => s.currentUser
+);
+
+export const isUserLoggedIn = createSelector(
+  getUsersState,
+  (s) => s.isLoggedIn
+);

@@ -2,6 +2,19 @@
  * Interface for the 'Users' data
  */
 export interface UsersEntity {
-  id: string | number; // Primary ID
-  name: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export interface CreateUserDto {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  access_token: string;
 }

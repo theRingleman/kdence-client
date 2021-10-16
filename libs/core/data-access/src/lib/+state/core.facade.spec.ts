@@ -5,26 +5,21 @@ import { StoreModule, Store } from '@ngrx/store';
 import { NxModule } from '@nrwl/angular';
 import { readFirst } from '@nrwl/angular/testing';
 
-import * as UsersActions from './users.actions';
-import { UsersEffects } from './users.effects';
-import { UsersFacade } from './users.facade';
-import { UsersEntity } from './users.models';
-import {
-  USERS_FEATURE_KEY,
-  State,
-  initialState,
-  reducer,
-} from './users.reducer';
-import * as UsersSelectors from './users.selectors';
+import * as CoreActions from './core.actions';
+import { CoreEffects } from './core.effects';
+import { CoreFacade } from './core.facade';
+import { CoreEntity } from './core.models';
+import { CORE_FEATURE_KEY, State, initialState, reducer } from './core.reducer';
+import * as CoreSelectors from './core.selectors';
 
 interface TestSchema {
-  users: State;
+  core: State;
 }
 
-describe('UsersFacade', () => {
-  let facade: UsersFacade;
+describe('CoreFacade', () => {
+  let facade: CoreFacade;
   let store: Store<TestSchema>;
-  const createUsersEntity = (id: string, name = ''): UsersEntity => ({
+  const createCoreEntity = (id: string, name = ''): CoreEntity => ({
     id,
     name: name || `name-${id}`,
   });
@@ -33,10 +28,10 @@ describe('UsersFacade', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
-          StoreModule.forFeature(USERS_FEATURE_KEY, reducer),
-          EffectsModule.forFeature([UsersEffects]),
+          StoreModule.forFeature(CORE_FEATURE_KEY, reducer),
+          EffectsModule.forFeature([CoreEffects]),
         ],
-        providers: [UsersFacade],
+        providers: [CoreFacade],
       })
       class CustomFeatureModule {}
 
@@ -52,14 +47,14 @@ describe('UsersFacade', () => {
       TestBed.configureTestingModule({ imports: [RootModule] });
 
       store = TestBed.inject(Store);
-      facade = TestBed.inject(UsersFacade);
+      facade = TestBed.inject(CoreFacade);
     });
 
     /**
      * The initially generated facade::loadAll() returns empty array
      */
     it('loadAll() should return empty list with loaded == true', async () => {
-      let list = await readFirst(facade.allUsers$);
+      let list = await readFirst(facade.allCore$);
       let isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
@@ -67,7 +62,7 @@ describe('UsersFacade', () => {
 
       facade.init();
 
-      list = await readFirst(facade.allUsers$);
+      list = await readFirst(facade.allCore$);
       isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
@@ -75,22 +70,22 @@ describe('UsersFacade', () => {
     });
 
     /**
-     * Use `loadUsersSuccess` to manually update list
+     * Use `loadCoreSuccess` to manually update list
      */
-    it('allUsers$ should return the loaded list; and loaded flag == true', async () => {
-      let list = await readFirst(facade.allUsers$);
+    it('allCore$ should return the loaded list; and loaded flag == true', async () => {
+      let list = await readFirst(facade.allCore$);
       let isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
       expect(isLoaded).toBe(false);
 
       store.dispatch(
-        UsersActions.loadCurrentUserSuccess({
-          users: [createUsersEntity('AAA'), createUsersEntity('BBB')],
+        CoreActions.loadCoreSuccess({
+          core: [createCoreEntity('AAA'), createCoreEntity('BBB')],
         })
       );
 
-      list = await readFirst(facade.allUsers$);
+      list = await readFirst(facade.allCore$);
       isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(2);

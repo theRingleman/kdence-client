@@ -16,7 +16,7 @@ describe('Users Reducer', () => {
         createUsersEntity('PRODUCT-AAA'),
         createUsersEntity('PRODUCT-zzz'),
       ];
-      const action = UsersActions.loadUsersSuccess({ users });
+      const action = UsersActions.loadCurrentUserSuccess({ users });
 
       const result: State = reducer(initialState, action);
 

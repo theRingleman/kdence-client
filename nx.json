@@ -33,6 +33,12 @@
     ]
   },
   "projects": {
+    "core-constants": {
+      "tags": []
+    },
+    "core-data-access": {
+      "tags": []
+    },
     "core-features": {
       "tags": []
     },
