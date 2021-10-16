@@ -1,6 +1,113 @@
 {
   "version": 1,
   "projects": {
+    "core-features": {
+      "projectType": "library",
+      "root": "libs/core/features",
+      "sourceRoot": "libs/core/features/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/features"],
+          "options": {
+            "jestConfig": "libs/core/features/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/features/src/**/*.ts",
+              "libs/core/features/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "core-ui": {
+      "projectType": "library",
+      "root": "libs/core/ui",
+      "sourceRoot": "libs/core/ui/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/ui"],
+          "options": {
+            "jestConfig": "libs/core/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/ui/src/**/*.ts",
+              "libs/core/ui/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/core/ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/core-ui",
+            "config": {
+              "configFolder": "libs/core/ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "core-ui-e2e": {
+      "root": "apps/core-ui-e2e",
+      "sourceRoot": "apps/core-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/core-ui-e2e/cypress.json",
+            "devServerTarget": "core-ui:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "core-ui:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/core-ui-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "kdence-client": {
       "projectType": "application",
       "root": "apps/kdence-client",
@@ -21,7 +128,7 @@
               "apps/kdence-client/src/favicon.ico",
               "apps/kdence-client/src/assets"
             ],
-            "styles": ["apps/kdence-client/src/styles.scss"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "apps/kdence-client/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -90,6 +197,37 @@
           "options": {
             "jestConfig": "apps/kdence-client/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/kdence-client/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/kdence-client",
+            "config": {
+              "configFolder": "apps/kdence-client/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }
@@ -198,6 +336,7 @@
     }
   },
   "cli": {
+    "analytics": false,
     "defaultCollection": "@nrwl/angular",
     "packageManager": "npm"
   },
