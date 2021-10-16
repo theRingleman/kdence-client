@@ -120,6 +120,81 @@
           }
         }
       }
+    },
+    "users-data-access": {
+      "projectType": "library",
+      "root": "libs/users/data-access",
+      "sourceRoot": "libs/users/data-access/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/users/data-access"],
+          "options": {
+            "jestConfig": "libs/users/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/users/data-access/src/**/*.ts",
+              "libs/users/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "users-features": {
+      "projectType": "library",
+      "root": "libs/users/features",
+      "sourceRoot": "libs/users/features/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/users/features"],
+          "options": {
+            "jestConfig": "libs/users/features/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/users/features/src/**/*.ts",
+              "libs/users/features/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "users-ui": {
+      "projectType": "library",
+      "root": "libs/users/ui",
+      "sourceRoot": "libs/users/ui/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/users/ui"],
+          "options": {
+            "jestConfig": "libs/users/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/users/ui/src/**/*.ts",
+              "libs/users/ui/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -33,6 +33,15 @@
     "kdence-client-e2e": {
       "tags": [],
       "implicitDependencies": ["kdence-client"]
+    },
+    "users-data-access": {
+      "tags": ["scope:users", "type:data-access"]
+    },
+    "users-features": {
+      "tags": ["scope:users", "type:feature"]
+    },
+    "users-ui": {
+      "tags": ["scope:users", "type:ui"]
     }
   }
 }

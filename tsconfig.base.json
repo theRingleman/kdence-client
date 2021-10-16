@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@kd": ["libs/users/ui/src/index.ts"],
+      "@kdence-client/users/data-access": [
+        "libs/users/data-access/src/index.ts"
+      ],
+      "@kdence-client/users/features": ["libs/users/features/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
