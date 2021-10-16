@@ -1,1 +1,18 @@
-<p>navigation works!</p>
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu>
+    <button mat-menu-item>Household</button>
+    <button mat-menu-item>Goals</button>
+    <button mat-menu-item>Tasks</button>
+  </mat-menu>
+  <button mat-button class="home">Kdence</button>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>

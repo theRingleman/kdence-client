@@ -128,7 +128,7 @@
               "apps/kdence-client/src/favicon.ico",
               "apps/kdence-client/src/assets"
             ],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "apps/kdence-client/src/styles.scss"],
+            "styles": ["node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/kdence-client/src/styles.scss"],
             "scripts": []
           },
           "configurations": {

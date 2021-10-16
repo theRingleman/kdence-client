@@ -1,0 +1,14 @@
+:host {
+  form {
+    margin-top: 8px;
+  }
+
+  .input-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .mat-form-field {
+      flex: 1;
+    }
+  }
+}

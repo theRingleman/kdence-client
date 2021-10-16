@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy,
   NgModule,
 } from '@angular/core';
+import { CoreUiModule } from '@kdence-client/core/ui';
 
 @Component({
   selector: 'kd-shell',
@@ -21,6 +22,7 @@ export class ShellComponent implements OnInit {
 
 @NgModule({
   declarations: [ShellComponent],
+  imports: [CoreUiModule],
   exports: [ShellComponent],
 })
 export class ShellModule {}
