@@ -10,6 +10,7 @@ export interface State extends EntityState<HouseholdsEntity> {
   selectedId?: string | number; // which Households record has been selected
   loaded: boolean; // has the Households list been loaded
   error?: string | null; // last known error (if any)
+  household: HouseholdsEntity | null;
 }
 
 export interface HouseholdsPartialState {
@@ -22,6 +23,7 @@ export const householdsAdapter: EntityAdapter<HouseholdsEntity> =
 export const initialState: State = householdsAdapter.getInitialState({
   // set initial required properties
   loaded: false,
+  household: null,
 });
 
 const householdsReducer = createReducer(
@@ -37,6 +39,14 @@ const householdsReducer = createReducer(
   on(HouseholdsActions.loadHouseholdsFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(HouseholdsActions.loadHouseholdFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+  on(HouseholdsActions.loadHouseholdSuccess, (s, { household }) => ({
+    ...s,
+    household,
   }))
 );
 
