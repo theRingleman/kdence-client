@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginSignupWrapperComponent } from './login-signup-wrapper/login-signup-wrapper.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { UsersDataAccessModule } from '@kdence-client/users/data-access';
+import { TitleBarComponent } from './title-bar/title-bar.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { UsersDataAccessModule } from '@kdence-client/users/data-access';
     LoginComponent,
     SignupComponent,
     LoginSignupWrapperComponent,
+    TitleBarComponent,
   ],
   exports: [
     NavigationComponent,
