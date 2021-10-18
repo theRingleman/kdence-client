@@ -22,6 +22,17 @@ export class UsersEffects {
     )
   );
 
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.login),
+      switchMap(({ email, password }) =>
+        this.usersService
+          .login(email, password)
+          .pipe(map(() => UsersActions.userLoggedIn()))
+      )
+    )
+  );
+
   constructor(
     private readonly actions$: Actions,
     private usersService: UsersService

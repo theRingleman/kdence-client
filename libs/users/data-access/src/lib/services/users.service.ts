@@ -16,11 +16,13 @@ export class UsersService {
     return this.http.get<UsersEntity>(profileRoute());
   }
 
-  login(email: string, password: string) {
-    this.http.post<LoginResponse>(loginRoute(), { email, password }).pipe(
-      map((res) => {
-        this.jwtService.saveToken(res.access_token);
-      })
-    );
+  login(email: string, password: string): Observable<void> {
+    return this.http
+      .post<LoginResponse>(loginRoute(), { email, password })
+      .pipe(
+        map((res) => {
+          this.jwtService.saveToken(res.access_token);
+        })
+      );
   }
 }

@@ -18,3 +18,8 @@ export interface CreateUserDto {
 export interface LoginResponse {
   access_token: string;
 }
+
+export interface LoginInput {
+  email: string;
+  password: string;
+}

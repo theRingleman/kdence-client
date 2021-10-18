@@ -1,15 +1,17 @@
-<form>
+<form [formGroup]='loginForm'>
   <div class="input-wrapper">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input type="email" matInput placeholder="your@email.com">
+      <input type="email" formControlName='email' matInput placeholder="your@email.com">
+      <mat-error *ngIf="loginForm.controls.email.invalid">Please enter a valid email address.</mat-error>
     </mat-form-field>
   </div>
   <div class="input-wrapper">
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
-      <input type="password" matInput placeholder="Your Password">
+      <input type="password" matInput formControlName='password' placeholder="Your Password">
+      <mat-error *ngIf="loginForm.controls.password.invalid">Password is required.</mat-error>
     </mat-form-field>
   </div>
-  <button mat-flat-button color="accent">Log In</button>
+  <button mat-flat-button [disabled]='!loginForm.valid' (click)='login()' color="accent">Log In</button>
 </form>

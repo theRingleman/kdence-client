@@ -6,8 +6,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ShellModule } from '@kdence-client/core/features';
+import { CoreFeaturesModule } from '@kdence-client/core/features';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreDataAccessModule } from '@kdence-client/core/data-access';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,10 +24,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         },
       }
     ),
-    ShellModule,
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     BrowserAnimationsModule,
+    CoreDataAccessModule.forRoot(),
+    CoreFeaturesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

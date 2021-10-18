@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class JwtService {
-  getToken(): string | null {
-    return window.localStorage.getItem('token');
+  getToken(): string {
+    return window.localStorage.getItem('token') ?? '';
   }
 
   saveToken(token: string): void {

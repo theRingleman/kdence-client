@@ -21,4 +21,8 @@ export const loadUsersFailure = createAction(
 );
 
 export const userLoggedIn = createAction('[Users/API] User Logged In');
+export const login = createAction(
+  '[Users/API] Login',
+  props<{ email: string; password: string }>()
+);
 export const userLoggedOut = createAction('[Users/API] User Logged Out');

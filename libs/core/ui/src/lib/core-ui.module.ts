@@ -12,6 +12,9 @@ import { SignupComponent } from './signup/signup.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginSignupWrapperComponent } from './login-signup-wrapper/login-signup-wrapper.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { UsersDataAccessModule } from '@kdence-client/users/data-access';
 
 @NgModule({
   imports: [
@@ -29,8 +32,20 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     CommonModule,
     MatButtonModule,
+    MatTabsModule,
+    UsersDataAccessModule,
   ],
-  declarations: [NavigationComponent, LoginComponent, SignupComponent],
-  exports: [NavigationComponent, LoginComponent],
+  declarations: [
+    NavigationComponent,
+    LoginComponent,
+    SignupComponent,
+    LoginSignupWrapperComponent,
+  ],
+  exports: [
+    NavigationComponent,
+    LoginComponent,
+    SignupComponent,
+    LoginSignupWrapperComponent,
+  ],
 })
 export class CoreUiModule {}

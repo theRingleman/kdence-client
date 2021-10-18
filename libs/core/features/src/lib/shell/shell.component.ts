@@ -3,26 +3,24 @@ import {
   OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  NgModule,
 } from '@angular/core';
-import { CoreUiModule } from '@kdence-client/core/ui';
+import { UsersFacade } from '@kdence-client/users/data-access';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'kd-shell',
+  selector: 'kdence-client-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellComponent implements OnInit {
-  constructor() {}
+  currentUser$ = this.usersFacade.currentUser$;
+  isLoggedIn$ = this.usersFacade.isLoggedIn$;
 
-  ngOnInit(): void {}
+  constructor(private usersFacade: UsersFacade) {}
+
+  ngOnInit(): void {
+    this.usersFacade.isLoggedIn();
+  }
 }
-
-@NgModule({
-  declarations: [ShellComponent],
-  imports: [CoreUiModule],
-  exports: [ShellComponent],
-})
-export class ShellModule {}

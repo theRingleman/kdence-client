@@ -1,3 +1,15 @@
 <kd-navigation></kd-navigation>
-
-<kdence-client-login></kdence-client-login>
+<div class='wrapper'>
+  <mat-grid-list cols='6'>
+    <mat-grid-tile [colspan]='1'></mat-grid-tile>
+    <mat-grid-tile [colspan]='4' class='main'>
+      <div class='content-wrapper' *ngIf='isLoggedIn$ | async else login'>
+        <h1>farts</h1>
+      </div>
+      <ng-template class='login-wrapper' #login>
+        <kdence-client-login-signup-wrapper></kdence-client-login-signup-wrapper>
+      </ng-template>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]='1'></mat-grid-tile>
+  </mat-grid-list>
+</div>

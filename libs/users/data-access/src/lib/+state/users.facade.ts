@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
-import * as UsersFeature from './users.reducer';
 import * as UsersSelectors from './users.selectors';
+import { JwtService } from '@kdence-client/core/data-access';
 
 @Injectable()
 export class UsersFacade {
@@ -17,14 +17,25 @@ export class UsersFacade {
   isLoggedIn$ = this.store.pipe(select(UsersSelectors.isUserLoggedIn));
   currentUser$ = this.store.pipe(select(UsersSelectors.getCurrentUser));
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store, private jwtService: JwtService) {}
 
   private dispatch(action: Action) {
     this.store.dispatch(action);
   }
 
-  logUserIn() {
-    this.store.dispatch(UsersActions.userLoggedIn());
+  isLoggedIn() {
+    if (this.jwtService.getToken() !== '') {
+      this.store.dispatch(UsersActions.userLoggedIn());
+      this.store.dispatch(UsersActions.loadUser());
+    }
+  }
+
+  login(email: string, password: string) {
+    this.store.dispatch(UsersActions.login({ email, password }));
+  }
+
+  loadUser() {
+    this.store.dispatch(UsersActions.loadUser());
   }
 
   logUserOut() {
