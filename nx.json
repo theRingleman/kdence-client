@@ -49,6 +49,9 @@
       "tags": [],
       "implicitDependencies": ["core-ui"]
     },
+    "households-data-access": {
+      "tags": []
+    },
     "kdence-client": {
       "tags": []
     },

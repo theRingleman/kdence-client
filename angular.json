@@ -158,6 +158,31 @@
         }
       }
     },
+    "households-data-access": {
+      "projectType": "library",
+      "root": "libs/households/data-access",
+      "sourceRoot": "libs/households/data-access/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/households/data-access"],
+          "options": {
+            "jestConfig": "libs/households/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/households/data-access/src/**/*.ts",
+              "libs/households/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "kdence-client": {
       "projectType": "application",
       "root": "apps/kdence-client",
