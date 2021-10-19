@@ -6,8 +6,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SignupInput } from '@kdence-client/core/data-access';
-import { Role } from '@kdence-client/users/data-access';
+import { CreateUserDto, Role } from '@kdence-client/users/data-access';
 
 @Component({
   selector: 'kdence-client-signup',
@@ -24,7 +23,7 @@ export class SignupComponent {
     password: ['', Validators.required],
   });
 
-  @Output() signupEvent = new EventEmitter<SignupInput>();
+  @Output() signupEvent = new EventEmitter<CreateUserDto>();
 
   constructor(private fb: FormBuilder) {}
 

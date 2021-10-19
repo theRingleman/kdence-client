@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { CreateHouseholdDto, HouseholdsEntity } from './households.models';
-import { SignupInput } from '@kdence-client/core/data-access';
+import { CreateUserDto } from '@kdence-client/users/data-access';
 
 export const init = createAction('[Households Page] Init');
 
@@ -31,7 +31,7 @@ export const loadHouseholdFailure = createAction(
 
 export const createHousehold = createAction(
   '[Households/API] Create Household',
-  props<{ dto: SignupInput }>()
+  props<{ dto: CreateUserDto }>()
 );
 
 export const createHouseholdSuccess = createAction(

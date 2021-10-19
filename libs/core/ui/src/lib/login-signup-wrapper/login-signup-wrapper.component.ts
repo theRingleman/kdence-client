@@ -3,9 +3,12 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { LoginInput, UsersFacade } from '@kdence-client/users/data-access';
+import {
+  CreateUserDto,
+  LoginInput,
+  UsersFacade,
+} from '@kdence-client/users/data-access';
 import { HouseholdsFacade } from '@kdence-client/households/data-access';
-import { SignupInput } from '@kdence-client/core/data-access';
 import { AuthFacade } from '@kdence-client/auth';
 
 @Component({
@@ -27,7 +30,7 @@ export class LoginSignupWrapperComponent {
     this.usersFacade.loadUser();
   }
 
-  signup(input: SignupInput) {
+  signup(input: CreateUserDto) {
     this.householdsFacade.createHousehold(input);
   }
 }

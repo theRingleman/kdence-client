@@ -4,7 +4,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { JwtService } from '@kdence-client/core/data-access';
-import { CreateUserDTO, UsersEntity } from './users.models';
+import { CreateUserDto, UsersEntity } from './users.models';
 
 @Injectable()
 export class UsersFacade {
@@ -31,7 +31,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  createUser(householdId: number, dto: CreateUserDTO) {
+  createUser(householdId: number, dto: CreateUserDto) {
     this.store.dispatch(UsersActions.createUser({ householdId, dto }));
   }
 

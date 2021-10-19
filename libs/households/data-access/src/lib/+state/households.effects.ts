@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
 
 import * as HouseholdsActions from './households.actions';
-import * as HouseholdsFeature from './households.reducer';
 import { HouseholdsService } from '../services/households.service';
 import { map, switchMap } from 'rxjs/operators';
 import { UsersFacade } from '@kdence-client/users/data-access';

@@ -10,9 +10,7 @@ import {
   UsersService,
 } from '@kdence-client/users/data-access';
 import { JwtService } from '@kdence-client/core/data-access';
-import { catchError, first, map, switchMap, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { profileRoute } from '@kdence-client/core/constants';
+import { first } from 'rxjs/operators';
 
 @Injectable()
 export class AuthFacade {
