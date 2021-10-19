@@ -10,7 +10,6 @@ export interface State extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   loaded: boolean; // has the User been loaded
   error?: string | null; // last known error (if any)
-  isLoggedIn: boolean;
   currentUser: UsersEntity | null;
 }
 
@@ -24,7 +23,6 @@ export const usersAdapter: EntityAdapter<UsersEntity> =
 export const initialState: State = usersAdapter.getInitialState({
   // set initial required properties
   loaded: false,
-  isLoggedIn: false,
   currentUser: null,
 });
 
@@ -41,9 +39,7 @@ const usersReducer = createReducer(
   on(UsersActions.loadCurrentUserSuccess, (s, { currentUser }) => ({
     ...s,
     currentUser,
-  })),
-  on(UsersActions.userLoggedOut, (s) => ({ ...s, isLoggedIn: false })),
-  on(UsersActions.userLoggedIn, (s) => ({ ...s, isLoggedIn: true }))
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

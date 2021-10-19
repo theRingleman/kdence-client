@@ -4,6 +4,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as HouseholdsActions from './households.actions';
 import * as HouseholdsFeature from './households.reducer';
 import * as HouseholdsSelectors from './households.selectors';
+import { SignupInput } from '@kdence-client/core/data-access';
 
 @Injectable()
 export class HouseholdsFacade {
@@ -27,5 +28,9 @@ export class HouseholdsFacade {
    */
   init() {
     this.store.dispatch(HouseholdsActions.init());
+  }
+
+  createHousehold(dto: SignupInput) {
+    this.store.dispatch(HouseholdsActions.createHousehold({ dto }));
   }
 }

@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { UsersFacade } from '@kdence-client/users/data-access';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { AuthFacade } from '@kdence-client/auth';
 
 @Component({
   selector: 'kdence-client-shell',
@@ -16,11 +16,14 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 })
 export class ShellComponent implements OnInit {
   currentUser$ = this.usersFacade.currentUser$;
-  isLoggedIn$ = this.usersFacade.isLoggedIn$;
+  isLoggedIn$ = this.authFacade.loggedIn$;
 
-  constructor(private usersFacade: UsersFacade) {}
+  constructor(
+    private usersFacade: UsersFacade,
+    private authFacade: AuthFacade
+  ) {}
 
   ngOnInit(): void {
-    this.usersFacade.isLoggedIn();
+    this.authFacade.isLoggedIn();
   }
 }

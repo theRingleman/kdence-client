@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { UsersEntity } from './users.models';
+import { CreateUserDto, UsersEntity } from './users.models';
 
-export const init = createAction('[Users Page] Init');
+export const init = createAction(
+  '[Users Page] Init',
+  props<{ householdId: number }>()
+);
 
 export const loadUser = createAction('[Users/API] Load Users');
 
@@ -20,9 +23,12 @@ export const loadUsersFailure = createAction(
   props<{ error: any }>()
 );
 
-export const userLoggedIn = createAction('[Users/API] User Logged In');
-export const login = createAction(
-  '[Users/API] Login',
-  props<{ email: string; password: string }>()
+export const createUser = createAction(
+  '[Users/API] Create User',
+  props<{ householdId: number; dto: CreateUserDto }>()
 );
-export const userLoggedOut = createAction('[Users/API] User Logged Out');
+
+export const createUserSuccess = createAction(
+  '[Users/API] Create User Success',
+  props<{ user: UsersEntity }>()
+);

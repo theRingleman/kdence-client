@@ -23,3 +23,16 @@ export interface LoginInput {
   email: string;
   password: string;
 }
+
+export interface CreateUserDTO {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  roleType: Role;
+}
+
+export enum Role {
+  Parent = 'parent',
+  Child = 'child',
+}

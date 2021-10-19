@@ -2,10 +2,11 @@ import {
   Component,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  OnInit,
-  Input,
 } from '@angular/core';
 import { LoginInput, UsersFacade } from '@kdence-client/users/data-access';
+import { HouseholdsFacade } from '@kdence-client/households/data-access';
+import { SignupInput } from '@kdence-client/core/data-access';
+import { AuthFacade } from '@kdence-client/auth';
 
 @Component({
   selector: 'kdence-client-login-signup-wrapper',
@@ -15,9 +16,18 @@ import { LoginInput, UsersFacade } from '@kdence-client/users/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginSignupWrapperComponent {
-  constructor(private usersFacade: UsersFacade) {}
+  constructor(
+    private usersFacade: UsersFacade,
+    private householdsFacade: HouseholdsFacade,
+    private authFacade: AuthFacade
+  ) {}
 
   login(input: LoginInput) {
-    this.usersFacade.login(input.email, input.password);
+    this.authFacade.login(input);
+    this.usersFacade.loadUser();
+  }
+
+  signup(input: SignupInput) {
+    this.householdsFacade.createHousehold(input);
   }
 }

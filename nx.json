@@ -33,6 +33,9 @@
     ]
   },
   "projects": {
+    "auth": {
+      "tags": []
+    },
     "core-constants": {
       "tags": []
     },

@@ -39,8 +39,3 @@ export const getCurrentUser = createSelector(
   getUsersState,
   (s) => s.currentUser
 );
-
-export const isUserLoggedIn = createSelector(
-  getUsersState,
-  (s) => s.isLoggedIn
-);

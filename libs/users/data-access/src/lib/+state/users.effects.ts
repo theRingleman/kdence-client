@@ -22,13 +22,13 @@ export class UsersEffects {
     )
   );
 
-  login$ = createEffect(() =>
+  createUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UsersActions.login),
-      switchMap(({ email, password }) =>
+      ofType(UsersActions.createUser),
+      switchMap(({ householdId, dto }) =>
         this.usersService
-          .login(email, password)
-          .pipe(map(() => UsersActions.userLoggedIn()))
+          .createUser(householdId, dto)
+          .pipe(map((user) => UsersActions.createUserSuccess({ user })))
       )
     )
   );

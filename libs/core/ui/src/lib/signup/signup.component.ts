@@ -1,10 +1,13 @@
 import {
   Component,
-  OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { SignupInput } from '@kdence-client/core/data-access';
+import { Role } from '@kdence-client/users/data-access';
 
 @Component({
   selector: 'kdence-client-signup',
@@ -13,8 +16,24 @@ import { FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignupComponent implements OnInit {
-  constructor() {}
+export class SignupComponent {
+  signupForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
 
-  ngOnInit(): void {}
+  @Output() signupEvent = new EventEmitter<SignupInput>();
+
+  constructor(private fb: FormBuilder) {}
+
+  signup() {
+    if (this.signupForm.valid) {
+      this.signupEvent.emit({
+        ...this.signupForm.value,
+        roleType: Role.Parent,
+      });
+    }
+  }
 }

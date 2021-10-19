@@ -1,7 +1,7 @@
 <mat-card>
   <ng-container>
     <mat-card-title>
-      Welcome! Please Login or Signup
+      Welcome!
     </mat-card-title>
     <mat-card-content>
       <mat-tab-group>
@@ -9,7 +9,7 @@
           <kdence-client-login (loginEvent)='login($event)'></kdence-client-login>
         </mat-tab>
         <mat-tab label="Sign Up">
-          <kdence-client-signup></kdence-client-signup>
+          <kdence-client-signup (signupEvent)='signup($event)'></kdence-client-signup>
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>

@@ -4,24 +4,29 @@ import { fetch } from '@nrwl/angular';
 
 import * as HouseholdsActions from './households.actions';
 import * as HouseholdsFeature from './households.reducer';
+import { HouseholdsService } from '../services/households.service';
+import { map, switchMap } from 'rxjs/operators';
+import { UsersFacade } from '@kdence-client/users/data-access';
 
 @Injectable()
 export class HouseholdsEffects {
-  init$ = createEffect(() =>
+  createHousehold$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(HouseholdsActions.init),
-      fetch({
-        run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return HouseholdsActions.loadHouseholdsSuccess({ households: [] });
-        },
-        onError: (action, error) => {
-          console.error('Error', error);
-          return HouseholdsActions.loadHouseholdsFailure({ error });
-        },
-      })
+      ofType(HouseholdsActions.createHousehold),
+      switchMap(({ dto }) =>
+        this.householdsService.createHousehold({ name: dto.lastName }).pipe(
+          map((household) => {
+            this.usersFacade.createUser(household.id, dto);
+            return HouseholdsActions.loadHouseholdSuccess({ household });
+          })
+        )
+      )
     )
   );
 
-  constructor(private readonly actions$: Actions) {}
+  constructor(
+    private readonly actions$: Actions,
+    private householdsService: HouseholdsService,
+    private usersFacade: UsersFacade
+  ) {}
 }

@@ -8,3 +8,7 @@ export interface HouseholdsEntity {
   name: string;
   users?: UsersEntity[];
 }
+
+export interface CreateHouseholdDto {
+  name: string;
+}

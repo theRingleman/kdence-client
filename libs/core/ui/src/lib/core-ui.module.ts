@@ -16,6 +16,7 @@ import { LoginSignupWrapperComponent } from './login-signup-wrapper/login-signup
 import { MatTabsModule } from '@angular/material/tabs';
 import { UsersDataAccessModule } from '@kdence-client/users/data-access';
 import { TitleBarComponent } from './title-bar/title-bar.component';
+import { HouseholdsDataAccessModule } from '@kdence-client/households/data-access';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { TitleBarComponent } from './title-bar/title-bar.component';
     MatButtonModule,
     MatTabsModule,
     UsersDataAccessModule,
+    HouseholdsDataAccessModule,
   ],
   declarations: [
     NavigationComponent,
