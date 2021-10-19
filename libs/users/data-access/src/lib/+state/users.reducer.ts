@@ -39,7 +39,8 @@ const usersReducer = createReducer(
   on(UsersActions.loadCurrentUserSuccess, (s, { currentUser }) => ({
     ...s,
     currentUser,
-  }))
+  })),
+  on(UsersActions.clearCurrentUser, (s) => ({ ...s, currentUser: null }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

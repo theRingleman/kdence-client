@@ -5,6 +5,7 @@ export enum AuthActionTypes {
   Login = '[Auth] Login',
   LoginSuccess = '[Auth] LoginSuccess',
   LoginFailure = '[Auth] LoginFailure',
+  Logout = '[Auth] Logout',
 }
 
 export class Login implements Action {
@@ -22,10 +23,15 @@ export class LoginFailure implements Action {
   constructor(public payload: any) {}
 }
 
-export type AuthAction = Login | LoginSuccess | LoginFailure;
+export class Logout implements Action {
+  readonly type = AuthActionTypes.Logout;
+}
+
+export type AuthAction = Login | LoginSuccess | LoginFailure | Logout;
 
 export const fromAuthActions = {
   Login,
   LoginSuccess,
   LoginFailure,
+  Logout,
 };

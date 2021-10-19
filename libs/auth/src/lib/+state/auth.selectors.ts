@@ -9,7 +9,7 @@ const getError = createSelector(
   (state: AuthState) => state.error
 );
 
-const getLoggedIn = createSelector(
+export const getLoggedIn = createSelector(
   getAuthState,
   (state: AuthState) => state.loggedIn
 );

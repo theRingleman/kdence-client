@@ -16,14 +16,17 @@ import { AuthFacade } from '@kdence-client/auth';
 })
 export class ShellComponent implements OnInit {
   currentUser$ = this.usersFacade.currentUser$;
-  isLoggedIn$ = this.authFacade.loggedIn$;
 
   constructor(
     private usersFacade: UsersFacade,
-    private authFacade: AuthFacade
+    public authFacade: AuthFacade
   ) {}
 
   ngOnInit(): void {
     this.authFacade.isLoggedIn();
+  }
+
+  logout() {
+    this.authFacade.logout();
   }
 }

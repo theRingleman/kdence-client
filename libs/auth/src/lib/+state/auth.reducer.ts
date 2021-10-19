@@ -3,8 +3,8 @@ import { AuthAction, AuthActionTypes } from './auth.actions';
 export const AUTH_FEATURE_KEY = 'auth';
 
 export interface AuthState {
-  error?: any; // last none error (if any)
   loggedIn: boolean;
+  error?: any; // last none error (if any)
 }
 
 export interface AuthPartialState {
@@ -26,6 +26,10 @@ export function reducer(
     }
     case AuthActionTypes.LoginFailure: {
       state = { ...state, loggedIn: false, error: action.payload };
+      break;
+    }
+    case AuthActionTypes.Logout: {
+      state = { ...state, loggedIn: false };
       break;
     }
   }

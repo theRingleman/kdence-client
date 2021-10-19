@@ -1,20 +1,24 @@
 import {
   Component,
-  OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  NgModule,
+  EventEmitter,
+  Output,
+  Input,
 } from '@angular/core';
 
 @Component({
-  selector: 'kd-navigation',
+  selector: 'kdence-client-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationComponent implements OnInit {
-  constructor() {}
+export class NavigationComponent {
+  @Output() logoutEvent = new EventEmitter();
+  @Input() loggedIn!: boolean | null;
 
-  ngOnInit(): void {}
+  logout() {
+    this.logoutEvent.emit();
+  }
 }

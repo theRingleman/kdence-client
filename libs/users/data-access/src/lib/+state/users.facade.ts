@@ -38,4 +38,8 @@ export class UsersFacade {
   setCurrentUser(currentUser: UsersEntity) {
     this.store.dispatch(UsersActions.loadCurrentUserSuccess({ currentUser }));
   }
+
+  clearCurrentUser() {
+    this.store.dispatch(UsersActions.clearCurrentUser());
+  }
 }

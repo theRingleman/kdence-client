@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { AuthPartialState } from './auth.reducer';
-import { authQuery } from './auth.selectors';
-import { Login, LoginFailure, LoginSuccess } from './auth.actions';
+import { authQuery, getLoggedIn } from './auth.selectors';
+import { Login, LoginFailure, LoginSuccess, Logout } from './auth.actions';
 import {
   LoginInput,
   UsersFacade,
@@ -14,7 +14,7 @@ import { first } from 'rxjs/operators';
 
 @Injectable()
 export class AuthFacade {
-  loggedIn$ = this.store.pipe(select(authQuery.getLoggedIn));
+  loggedIn$ = this.store.select(getLoggedIn);
 
   constructor(
     private readonly store: Store<AuthPartialState>,
@@ -25,6 +25,11 @@ export class AuthFacade {
 
   login(dto: LoginInput) {
     this.store.dispatch(new Login(dto));
+  }
+
+  logout() {
+    this.jwtService.destroyToken();
+    this.store.dispatch(new Logout());
   }
 
   isLoggedIn() {

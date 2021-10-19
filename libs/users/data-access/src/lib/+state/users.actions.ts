@@ -32,3 +32,5 @@ export const createUserSuccess = createAction(
   '[Users/API] Create User Success',
   props<{ user: UsersEntity }>()
 );
+
+export const clearCurrentUser = createAction('[Users/API] Clear Current User');

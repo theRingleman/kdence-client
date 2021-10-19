@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 
 import {
   AuthActionTypes,
@@ -13,15 +13,17 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  login$ = this.actions$.pipe(
-    ofType(AuthActionTypes.Login),
-    switchMap((action: Login) =>
-      this.usersService
-        .login(action.payload.email, action.payload.password)
-        .pipe(
-          map(() => new LoginSuccess()),
-          catchError((error) => of(new LoginFailure(error)))
-        )
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActionTypes.Login),
+      switchMap((action: Login) =>
+        this.usersService
+          .login(action.payload.email, action.payload.password)
+          .pipe(
+            map(() => new LoginSuccess()),
+            catchError((error) => of(new LoginFailure(error)))
+          )
+      )
     )
   );
 
