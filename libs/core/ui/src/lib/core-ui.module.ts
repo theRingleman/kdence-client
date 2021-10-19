@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { UsersDataAccessModule } from '@kdence-client/users/data-access';
 import { TitleBarComponent } from './title-bar/title-bar.component';
 import { HouseholdsDataAccessModule } from '@kdence-client/households/data-access';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { HouseholdsDataAccessModule } from '@kdence-client/households/data-acces
     MatTabsModule,
     UsersDataAccessModule,
     HouseholdsDataAccessModule,
+    RouterModule,
   ],
   declarations: [
     NavigationComponent,

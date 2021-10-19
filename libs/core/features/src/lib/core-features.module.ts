@@ -5,6 +5,15 @@ import { ShellComponent } from './shell/shell.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AuthModule } from '@kdence-client/auth';
 import { MatCardModule } from '@angular/material/card';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ShellComponent,
+    children: [{}],
+  },
+];
 
 @NgModule({
   imports: [
@@ -13,8 +22,9 @@ import { MatCardModule } from '@angular/material/card';
     MatGridListModule,
     AuthModule,
     MatCardModule,
+    RouterModule.forRoot(routes),
   ],
   declarations: [ShellComponent],
-  exports: [ShellComponent],
+  exports: [ShellComponent, RouterModule],
 })
 export class CoreFeaturesModule {}

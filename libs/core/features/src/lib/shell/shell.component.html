@@ -4,7 +4,7 @@
   <mat-grid-tile [colspan]='1'></mat-grid-tile>
   <mat-grid-tile [colspan]='4' class='main'>
     <div *ngIf='authFacade.loggedIn$ | async else login'>
-      farts
+      <router-outlet></router-outlet>
     </div>
     <ng-template class='login-wrapper' #login>
       <kdence-client-login-signup-wrapper></kdence-client-login-signup-wrapper>
