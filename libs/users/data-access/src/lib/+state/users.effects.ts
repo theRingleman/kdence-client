@@ -33,6 +33,17 @@ export class UsersEffects {
     )
   );
 
+  loadUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.init),
+      switchMap(({ householdId }) =>
+        this.usersService
+          .getHouseholdUsers(householdId)
+          .pipe(map((users) => UsersActions.loadUsersSuccess({ users })))
+      )
+    )
+  );
+
   constructor(
     private readonly actions$: Actions,
     private usersService: UsersService

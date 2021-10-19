@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
 import * as HouseholdsActions from './households.actions';
-import * as HouseholdsFeature from './households.reducer';
 import * as HouseholdsSelectors from './households.selectors';
 import { CreateUserDto } from '@kdence-client/users/data-access';
 
@@ -32,5 +31,9 @@ export class HouseholdsFacade {
 
   createHousehold(dto: CreateUserDto) {
     this.store.dispatch(HouseholdsActions.createHousehold({ dto }));
+  }
+
+  loadHousehold(id: number) {
+    this.store.dispatch(HouseholdsActions.loadHousehold({ id }));
   }
 }

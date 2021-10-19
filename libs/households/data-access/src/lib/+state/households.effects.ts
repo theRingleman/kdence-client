@@ -3,8 +3,9 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import * as HouseholdsActions from './households.actions';
 import { HouseholdsService } from '../services/households.service';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { UsersFacade } from '@kdence-client/users/data-access';
+import { of } from 'rxjs';
 
 @Injectable()
 export class HouseholdsEffects {
@@ -17,6 +18,22 @@ export class HouseholdsEffects {
             this.usersFacade.createUser(household.id, dto);
             return HouseholdsActions.loadHouseholdSuccess({ household });
           })
+        )
+      )
+    )
+  );
+
+  loadHousehold$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HouseholdsActions.loadHousehold),
+      switchMap(({ id }) =>
+        this.householdsService.getHousehold(id).pipe(
+          map((household) =>
+            HouseholdsActions.loadHouseholdSuccess({ household })
+          ),
+          catchError((error) =>
+            of(HouseholdsActions.loadHouseholdFailure({ error }))
+          )
         )
       )
     )

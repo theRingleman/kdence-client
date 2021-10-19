@@ -11,7 +11,16 @@ const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
-    children: [{}],
+    children: [
+      {
+        path: 'households',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('@kdence-client/households/feature').then(
+            (m) => m.HouseholdsFeatureModule
+          ),
+      },
+    ],
   },
 ];
 

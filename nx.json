@@ -55,12 +55,21 @@
     "households-data-access": {
       "tags": []
     },
+    "households-feature": {
+      "tags": []
+    },
+    "households-ui": {
+      "tags": []
+    },
     "kdence-client": {
       "tags": []
     },
     "kdence-client-e2e": {
       "tags": [],
       "implicitDependencies": ["kdence-client"]
+    },
+    "shared-ui": {
+      "tags": []
     },
     "users-data-access": {
       "tags": ["scope:users", "type:data-access"]

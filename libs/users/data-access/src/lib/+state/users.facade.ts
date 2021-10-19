@@ -5,6 +5,7 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { JwtService } from '@kdence-client/core/data-access';
 import { CreateUserDto, UsersEntity } from './users.models';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class UsersFacade {
@@ -13,7 +14,10 @@ export class UsersFacade {
    * and expose them as observables through the facade.
    */
   loaded$ = this.store.pipe(select(UsersSelectors.getUsersLoaded));
-  allUsers$ = this.store.pipe(select(UsersSelectors.getAllUsers));
+  allUsers$ = this.store.pipe(
+    select(UsersSelectors.getAllUsers),
+    filter((user) => user !== null)
+  );
   selectedUsers$ = this.store.pipe(select(UsersSelectors.getSelected));
   currentUser$ = this.store.pipe(select(UsersSelectors.getCurrentUser));
 

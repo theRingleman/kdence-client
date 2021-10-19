@@ -1,11 +1,15 @@
 /**
  * Interface for the 'Users' data
  */
+import { HouseholdsEntity } from '@kdence-client/households/data-access';
+
 export interface UsersEntity {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
+  roles?: Role[];
+  household?: HouseholdsEntity;
 }
 
 export interface CreateUserDto {
