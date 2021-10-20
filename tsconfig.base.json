@@ -26,6 +26,7 @@
         "libs/goals/data-access/src/index.ts"
       ],
       "@kdence-client/goals/features": ["libs/goals/features/src/index.ts"],
+      "@kdence-client/goals/models": ["libs/goals/models/src/index.ts"],
       "@kdence-client/goals/ui": ["libs/goals/ui/src/index.ts"],
       "@kdence-client/households/data-access": [
         "libs/households/data-access/src/index.ts"

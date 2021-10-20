@@ -8,10 +8,13 @@ export class GlobalErrorHandler implements ErrorHandler {
 
   handleError(error: any): void {
     if (!(error instanceof HttpErrorResponse)) {
-      error = error.erjection;
+      error = error.rejection;
     }
 
-    this.snackBar.open(`${error.statusText}. Please try again.`, 'Dismiss', {
+    let message = '';
+    message += error?.statusText ?? error?.message ?? error;
+
+    this.snackBar.open(`${message}. Please try again.`, 'Dismiss', {
       duration: 5000,
     });
   }

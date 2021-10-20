@@ -258,6 +258,31 @@
         }
       }
     },
+    "goals-models": {
+      "projectType": "library",
+      "root": "libs/goals/models",
+      "sourceRoot": "libs/goals/models/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/goals/models"],
+          "options": {
+            "jestConfig": "libs/goals/models/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/goals/models/src/**/*.ts",
+              "libs/goals/models/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "goals-ui": {
       "projectType": "library",
       "root": "libs/goals/ui",

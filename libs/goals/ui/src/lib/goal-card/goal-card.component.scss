@@ -1,0 +1,34 @@
+:host {
+  .wrapper {
+    margin-top: 10px;
+  }
+
+  .details-wrapper {
+    display: flex;
+    gap: 10px;
+  }
+
+  .mat-divider {
+    margin-bottom: 10px;
+  }
+
+  .mat-card-content {
+    margin-top: 20px;
+  }
+
+  .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .incomplete {
+      color: crimson;
+      font-size: 40px;
+    }
+
+    .complete {
+      color: darkgreen;
+      font-size: 40px;
+    }
+  }
+}

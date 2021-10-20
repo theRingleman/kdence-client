@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title class='title-wrapper'>
+    <div>
+      <mat-icon>flag</mat-icon> Goal: {{goal.name}}
+    </div>
+    <div>
+      <mat-icon [ngClass]="isComplete ? 'complete' : 'incomplete'">check_circle_outline</mat-icon>
+    </div>
+  </mat-card-title>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <div class='details-wrapper'>
+      <p><em>Item: </em></p>
+      <p>{{goal.item}}</p>
+    </div>
+    <div class='details-wrapper'>
+      <p><em>Earned Value: </em></p>
+      <p>{{goal.earnedValue / 100 | currency}}</p>
+    </div>
+    <div class='details-wrapper'>
+      <p><em>Completed Value: </em></p>
+      <p>{{goal.completionValue /100 | currency}}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <kdence-client-goal-progress-bar [goal]='goal'></kdence-client-goal-progress-bar>
+  </mat-card-footer>
+</mat-card>
