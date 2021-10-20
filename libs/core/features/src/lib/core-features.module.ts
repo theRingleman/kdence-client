@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreUiModule } from '@kdence-client/core/ui';
+import {
+  CoreUiModule,
+  LoginSignupWrapperComponent,
+} from '@kdence-client/core/ui';
 import { ShellComponent } from './shell/shell.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AuthModule } from '@kdence-client/auth';
@@ -18,6 +21,10 @@ const routes: Routes = [
           import('@kdence-client/households/feature').then(
             (m) => m.HouseholdsFeatureModule
           ),
+      },
+      {
+        path: 'login',
+        component: LoginSignupWrapperComponent,
       },
     ],
   },

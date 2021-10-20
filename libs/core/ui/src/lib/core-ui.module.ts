@@ -18,6 +18,7 @@ import { UsersDataAccessModule } from '@kdence-client/users/data-access';
 import { TitleBarComponent } from './title-bar/title-bar.component';
 import { HouseholdsDataAccessModule } from '@kdence-client/households/data-access';
 import { RouterModule } from '@angular/router';
+import { SharedUiModule } from '@kdence-client/shared/ui';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { RouterModule } from '@angular/router';
     UsersDataAccessModule,
     HouseholdsDataAccessModule,
     RouterModule,
+    SharedUiModule,
   ],
   declarations: [
     NavigationComponent,

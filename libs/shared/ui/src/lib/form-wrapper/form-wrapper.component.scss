@@ -1,0 +1,20 @@
+::ng-deep {
+  .mat-card {
+    min-width: 350px;
+    width: 100%;
+  }
+
+  form {
+    margin-top: 8px;
+
+    .input-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+
+      .mat-form-field {
+        flex: 1;
+      }
+    }
+  }
+}

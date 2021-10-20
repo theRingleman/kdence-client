@@ -1,0 +1,38 @@
+<form [formGroup]='usersForm'>
+  <div class="input-wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="your@email.com">
+      <mat-error *ngIf="usersForm.controls.email.invalid">Please enter a valid email address.</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="input-wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input type="text" matInput formControlName='firstName' placeholder="Your First Name">
+      <mat-error *ngIf="usersForm.controls.firstName.invalid">Please provide your first name.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput formControlName='lastName' placeholder="Your Last Name">
+      <mat-error *ngIf="usersForm.controls.lastName.invalid">Please provide your last name.</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="input-wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName='password' placeholder="Your Password">
+      <mat-error *ngIf="usersForm.controls.password.invalid">Please provide a password.</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="input-wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName='roleType'>
+        <mat-option *ngFor='let role of roles' [value]='role'>{{role}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="usersForm.controls.roleType.invalid">Please select a role.</mat-error>
+    </mat-form-field>
+  </div>
+  <button mat-flat-button color="accent" (click)='create()'>Create</button>
+</form>

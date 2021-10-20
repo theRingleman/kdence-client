@@ -11,6 +11,7 @@ import {
 } from '@kdence-client/users/data-access';
 import { JwtService } from '@kdence-client/core/data-access';
 import { first, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthFacade {
@@ -20,7 +21,8 @@ export class AuthFacade {
     private readonly store: Store<AuthPartialState>,
     private jwtService: JwtService,
     private usersService: UsersService,
-    private usersFacade: UsersFacade
+    private usersFacade: UsersFacade,
+    private router: Router
   ) {}
 
   login(dto: LoginInput) {
@@ -35,7 +37,7 @@ export class AuthFacade {
   isLoggedIn() {
     this.jwtService.getToken() !== ''
       ? this.attemptLogin()
-      : this.loginFailed();
+      : this.loginFailed({});
   }
 
   private attemptLogin(): void {
@@ -47,13 +49,12 @@ export class AuthFacade {
           this.store.dispatch(new LoginSuccess());
           this.usersFacade.setCurrentUser(user);
         },
-        (error) => {
-          this.store.dispatch(new LoginFailure(error));
-        }
+        (error) => this.loginFailed(error)
       );
   }
 
-  private loginFailed(): void {
-    this.store.dispatch(new LoginFailure({}));
+  private loginFailed(error: any): void {
+    this.router.navigate(['login']);
+    this.store.dispatch(new LoginFailure(error));
   }
 }

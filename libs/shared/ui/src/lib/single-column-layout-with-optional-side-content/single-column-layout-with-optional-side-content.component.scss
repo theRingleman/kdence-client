@@ -1,0 +1,14 @@
+:host {
+  .wrapper {
+    margin: 15px;
+    display: flex;
+  }
+
+  .gutter {
+    flex: 1;
+  }
+
+  .main {
+    flex: 4;
+  }
+}
