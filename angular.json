@@ -208,6 +208,81 @@
         }
       }
     },
+    "goals-data-access": {
+      "projectType": "library",
+      "root": "libs/goals/data-access",
+      "sourceRoot": "libs/goals/data-access/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/goals/data-access"],
+          "options": {
+            "jestConfig": "libs/goals/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/goals/data-access/src/**/*.ts",
+              "libs/goals/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "goals-features": {
+      "projectType": "library",
+      "root": "libs/goals/features",
+      "sourceRoot": "libs/goals/features/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/goals/features"],
+          "options": {
+            "jestConfig": "libs/goals/features/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/goals/features/src/**/*.ts",
+              "libs/goals/features/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "goals-ui": {
+      "projectType": "library",
+      "root": "libs/goals/ui",
+      "sourceRoot": "libs/goals/ui/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/goals/ui"],
+          "options": {
+            "jestConfig": "libs/goals/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/goals/ui/src/**/*.ts",
+              "libs/goals/ui/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "households-data-access": {
       "projectType": "library",
       "root": "libs/households/data-access",

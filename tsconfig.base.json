@@ -22,6 +22,11 @@
       "@kdence-client/core/features": ["libs/core/features/src/index.ts"],
       "@kdence-client/core/ui": ["libs/core/ui/src/index.ts"],
       "@kdence-client/core/utils": ["libs/core/utils/src/index.ts"],
+      "@kdence-client/goals/data-access": [
+        "libs/goals/data-access/src/index.ts"
+      ],
+      "@kdence-client/goals/features": ["libs/goals/features/src/index.ts"],
+      "@kdence-client/goals/ui": ["libs/goals/ui/src/index.ts"],
       "@kdence-client/households/data-access": [
         "libs/households/data-access/src/index.ts"
       ],

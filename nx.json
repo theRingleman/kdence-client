@@ -55,6 +55,15 @@
     "core-utils": {
       "tags": []
     },
+    "goals-data-access": {
+      "tags": []
+    },
+    "goals-features": {
+      "tags": []
+    },
+    "goals-ui": {
+      "tags": []
+    },
     "households-data-access": {
       "tags": []
     },
