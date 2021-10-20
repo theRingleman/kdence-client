@@ -14,17 +14,17 @@ export const loadHouseholdsFailure = createAction(
   props<{ error: any }>()
 );
 
-export const loadHousehold = createAction(
-  '[Households/API] Load Household',
+export const fetchCurrentHousehold = createAction(
+  '[Households/API] Fetch Current Household',
   props<{ id: number }>()
 );
 
-export const loadHouseholdSuccess = createAction(
+export const loadCurrentHouseholdSuccess = createAction(
   '[Households/API] Load Household Success',
   props<{ household: HouseholdsEntity }>()
 );
 
-export const loadHouseholdFailure = createAction(
+export const loadCurrentHouseholdFailure = createAction(
   '[Households/API] Load Household Failure',
   props<{ error: any }>()
 );

@@ -28,7 +28,7 @@ describe('UsersEffects', () => {
 
   describe('init$', () => {
     it('should work', () => {
-      actions = hot('-a-|', { a: UsersActions.init() });
+      actions = hot('-a-|', { a: UsersActions.loadHouseholdUsers() });
 
       const expected = hot('-a-|', {
         a: UsersActions.loadCurrentUserSuccess({ users: [] }),

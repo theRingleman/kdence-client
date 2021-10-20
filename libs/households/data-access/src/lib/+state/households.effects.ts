@@ -16,7 +16,7 @@ export class HouseholdsEffects {
         this.householdsService.createHousehold({ name: dto.lastName }).pipe(
           map((household) => {
             this.usersFacade.createUser(household.id, dto);
-            return HouseholdsActions.loadHouseholdSuccess({ household });
+            return HouseholdsActions.loadCurrentHouseholdSuccess({ household });
           })
         )
       )
@@ -25,14 +25,14 @@ export class HouseholdsEffects {
 
   loadHousehold$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(HouseholdsActions.loadHousehold),
+      ofType(HouseholdsActions.fetchCurrentHousehold),
       switchMap(({ id }) =>
         this.householdsService.getHousehold(id).pipe(
           map((household) =>
-            HouseholdsActions.loadHouseholdSuccess({ household })
+            HouseholdsActions.loadCurrentHouseholdSuccess({ household })
           ),
           catchError((error) =>
-            of(HouseholdsActions.loadHouseholdFailure({ error }))
+            of(HouseholdsActions.loadCurrentHouseholdFailure({ error }))
           )
         )
       )

@@ -28,14 +28,20 @@ export class UsersEffects {
       switchMap(({ householdId, dto }) =>
         this.usersService
           .createUser(householdId, dto)
-          .pipe(map((user) => UsersActions.createUserSuccess({ user })))
+          .pipe(
+            map((user) =>
+              UsersActions.loadHouseholdUsers({
+                householdId: user!.household!.id,
+              })
+            )
+          )
       )
     )
   );
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UsersActions.init),
+      ofType(UsersActions.loadHouseholdUsers),
       switchMap(({ householdId }) =>
         this.usersService
           .getHouseholdUsers(householdId)

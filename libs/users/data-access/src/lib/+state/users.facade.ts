@@ -5,7 +5,8 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { JwtService } from '@kdence-client/core/data-access';
 import { CreateUserDto, UsersEntity } from './users.models';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
+import { getUsersLoaded } from './users.selectors';
 
 @Injectable()
 export class UsersFacade {
@@ -27,8 +28,15 @@ export class UsersFacade {
     this.store.dispatch(action);
   }
 
-  init(householdId: number) {
-    this.store.dispatch(UsersActions.init({ householdId }));
+  getHouseholdUsers(householdId: number) {
+    this.store
+      .select(getUsersLoaded)
+      .pipe(take(1))
+      .subscribe((loaded) => {
+        if (!loaded) {
+          this.store.dispatch(UsersActions.loadHouseholdUsers({ householdId }));
+        }
+      });
   }
 
   loadUser() {

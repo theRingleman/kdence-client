@@ -3,10 +3,11 @@ import {
   OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
+  OnDestroy,
 } from '@angular/core';
 import { HouseholdsFacade } from '@kdence-client/households/data-access';
-import { UsersEntity, UsersFacade } from '@kdence-client/users/data-access';
-import { first } from 'rxjs/operators';
+import { UsersFacade } from '@kdence-client/users/data-access';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'kdence-client-shell',
@@ -15,8 +16,9 @@ import { first } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShellComponent implements OnInit {
-  currentUser!: UsersEntity | null;
+export class ShellComponent implements OnInit, OnDestroy {
+  private currentUserSub!: Subscription;
+  householdUsers$ = this.usersFacade.allUsers$;
 
   constructor(
     public householdsFacade: HouseholdsFacade,
@@ -24,16 +26,15 @@ export class ShellComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCurrentUser();
-    if (this.currentUser?.household) {
-      this.householdsFacade.loadHousehold(this.currentUser.household.id);
-      this.usersFacade.init(this.currentUser.household.id);
-    }
+    this.currentUserSub = this.usersFacade.currentUser$.subscribe((user) => {
+      if (user !== null) {
+        this.householdsFacade.loadHousehold(user!.household!.id);
+        this.usersFacade.getHouseholdUsers(user!.household!.id);
+      }
+    });
   }
 
-  private getCurrentUser(): void {
-    this.usersFacade.currentUser$
-      .pipe(first())
-      .subscribe((user) => (this.currentUser = user));
+  ngOnDestroy() {
+    this.currentUserSub.unsubscribe();
   }
 }

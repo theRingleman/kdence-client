@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { CreateUserDto, UsersEntity } from './users.models';
 
-export const init = createAction(
-  '[Users Page] Init',
+export const loadHouseholdUsers = createAction(
+  '[Users] Load Household Users',
   props<{ householdId: number }>()
 );
 

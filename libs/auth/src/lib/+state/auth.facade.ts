@@ -10,7 +10,7 @@ import {
   UsersService,
 } from '@kdence-client/users/data-access';
 import { JwtService } from '@kdence-client/core/data-access';
-import { first } from 'rxjs/operators';
+import { first, take } from 'rxjs/operators';
 
 @Injectable()
 export class AuthFacade {
@@ -41,7 +41,7 @@ export class AuthFacade {
   private attemptLogin(): void {
     this.usersService
       .getUser()
-      .pipe(first())
+      .pipe(take(1))
       .subscribe(
         (user) => {
           this.store.dispatch(new LoginSuccess());

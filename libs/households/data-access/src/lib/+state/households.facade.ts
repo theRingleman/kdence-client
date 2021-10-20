@@ -18,6 +18,9 @@ export class HouseholdsFacade {
   selectedHouseholds$ = this.store.pipe(
     select(HouseholdsSelectors.getSelected)
   );
+  currentHousehold$ = this.store.pipe(
+    select(HouseholdsSelectors.getCurrentHousehold)
+  );
 
   constructor(private readonly store: Store) {}
 
@@ -34,6 +37,6 @@ export class HouseholdsFacade {
   }
 
   loadHousehold(id: number) {
-    this.store.dispatch(HouseholdsActions.loadHousehold({ id }));
+    this.store.dispatch(HouseholdsActions.fetchCurrentHousehold({ id }));
   }
 }

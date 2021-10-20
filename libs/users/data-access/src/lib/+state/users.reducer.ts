@@ -28,7 +28,11 @@ export const initialState: State = usersAdapter.getInitialState({
 
 const usersReducer = createReducer(
   initialState,
-  on(UsersActions.init, (state) => ({ ...state, loaded: false, error: null })),
+  on(UsersActions.loadHouseholdUsers, (state) => ({
+    ...state,
+    loaded: true,
+    error: null,
+  })),
   on(UsersActions.loadUsersSuccess, (state, { users }) =>
     usersAdapter.setAll(users, { ...state, loaded: true })
   ),

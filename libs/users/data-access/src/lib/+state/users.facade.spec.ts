@@ -65,7 +65,7 @@ describe('UsersFacade', () => {
       expect(list.length).toBe(0);
       expect(isLoaded).toBe(false);
 
-      facade.init();
+      facade.getHouseholdUsers();
 
       list = await readFirst(facade.allUsers$);
       isLoaded = await readFirst(facade.loaded$);
