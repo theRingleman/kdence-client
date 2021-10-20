@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromAuth from './+state/auth.reducer';
 import { AuthEffects } from './+state/auth.effects';
 import { AuthFacade } from './+state/auth.facade';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { AuthFacade } from './+state/auth.facade';
     StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
-  providers: [AuthFacade],
+  providers: [AuthFacade, AuthGuard],
 })
 export class AuthModule {}

@@ -52,6 +52,9 @@
       "tags": [],
       "implicitDependencies": ["core-ui"]
     },
+    "core-utils": {
+      "tags": []
+    },
     "households-data-access": {
       "tags": []
     },

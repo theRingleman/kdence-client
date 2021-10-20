@@ -8,6 +8,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { LoginInput } from '@kdence-client/users/data-access';
+import { AuthFacade } from '@kdence-client/auth';
 
 @Component({
   selector: 'kdence-client-login',
@@ -25,11 +26,11 @@ export class LoginComponent {
   @Output()
   loginEvent = new EventEmitter<LoginInput>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authFacade: AuthFacade) {}
 
   login() {
     if (this.loginForm.valid) {
-      this.loginEvent.emit(this.loginForm.value);
+      this.authFacade.login({ ...this.loginForm.value });
     }
   }
 }

@@ -183,6 +183,31 @@
         }
       }
     },
+    "core-utils": {
+      "projectType": "library",
+      "root": "libs/core/utils",
+      "sourceRoot": "libs/core/utils/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/utils"],
+          "options": {
+            "jestConfig": "libs/core/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/utils/src/**/*.ts",
+              "libs/core/utils/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "households-data-access": {
       "projectType": "library",
       "root": "libs/households/data-access",

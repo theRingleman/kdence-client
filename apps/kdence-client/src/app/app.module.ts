@@ -10,6 +10,7 @@ import { CoreFeaturesModule } from '@kdence-client/core/features';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreDataAccessModule } from '@kdence-client/core/data-access';
 import { AppRoutingModule } from './app.routing.module';
+import { CoreUtilsModule } from '@kdence-client/core/utils';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { AppRoutingModule } from './app.routing.module';
     CoreDataAccessModule.forRoot(),
     CoreFeaturesModule,
     AppRoutingModule,
+    CoreUtilsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

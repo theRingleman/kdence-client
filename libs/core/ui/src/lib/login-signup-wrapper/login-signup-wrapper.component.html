@@ -1,13 +1,10 @@
 <kdence-client-single-column-layout>
   <kdence-client-form-wrapper>
     <h1 title>Welcome!</h1>
-    <mat-tab-group>
-      <mat-tab label="Log In">
-        <kdence-client-login (loginEvent)='login($event)'></kdence-client-login>
-      </mat-tab>
-      <mat-tab label="Sign Up">
-        <kdence-client-signup (signupEvent)='signup($event)'></kdence-client-signup>
-      </mat-tab>
-    </mat-tab-group>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link routerLink='login'>Login</a>
+      <a mat-tab-link routerLink='signup'>Signup</a>
+    </nav>
+    <router-outlet></router-outlet>
   </kdence-client-form-wrapper>
 </kdence-client-single-column-layout>

@@ -21,6 +21,7 @@
       "@kdence-client/core/data-access": ["libs/core/data-access/src/index.ts"],
       "@kdence-client/core/features": ["libs/core/features/src/index.ts"],
       "@kdence-client/core/ui": ["libs/core/ui/src/index.ts"],
+      "@kdence-client/core/utils": ["libs/core/utils/src/index.ts"],
       "@kdence-client/households/data-access": [
         "libs/households/data-access/src/index.ts"
       ],

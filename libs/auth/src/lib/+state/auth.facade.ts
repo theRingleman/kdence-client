@@ -10,7 +10,7 @@ import {
   UsersService,
 } from '@kdence-client/users/data-access';
 import { JwtService } from '@kdence-client/core/data-access';
-import { first, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -54,7 +54,6 @@ export class AuthFacade {
   }
 
   private loginFailed(error: any): void {
-    this.router.navigate(['login']);
     this.store.dispatch(new LoginFailure(error));
   }
 }

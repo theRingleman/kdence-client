@@ -6,6 +6,7 @@ import {
   Output,
   Input,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'kdence-client-navigation',
@@ -18,7 +19,10 @@ export class NavigationComponent {
   @Output() logoutEvent = new EventEmitter();
   @Input() loggedIn!: boolean | null;
 
+  constructor(private router: Router) {}
+
   logout() {
     this.logoutEvent.emit();
+    this.router.navigate(['auth/login']);
   }
 }

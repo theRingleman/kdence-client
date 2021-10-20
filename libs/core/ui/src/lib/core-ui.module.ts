@@ -41,6 +41,10 @@ import { SharedUiModule } from '@kdence-client/shared/ui';
     HouseholdsDataAccessModule,
     RouterModule,
     SharedUiModule,
+    RouterModule.forChild([
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+    ]),
   ],
   declarations: [
     NavigationComponent,

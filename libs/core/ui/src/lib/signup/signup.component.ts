@@ -2,11 +2,12 @@ import {
   Component,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CreateUserDto, Role } from '@kdence-client/users/data-access';
+import { Role } from '@kdence-client/users/data-access';
+import { Router } from '@angular/router';
+import { HouseholdsFacade } from '@kdence-client/households/data-access';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'kdence-client-signup',
@@ -23,16 +24,25 @@ export class SignupComponent {
     password: ['', Validators.required],
   });
 
-  @Output() signupEvent = new EventEmitter<CreateUserDto>();
-
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private householdsFacade: HouseholdsFacade,
+    private snackBar: MatSnackBar
+  ) {}
 
   signup() {
     if (this.signupForm.valid) {
-      this.signupEvent.emit({
+      this.householdsFacade.createHousehold({
         ...this.signupForm.value,
         roleType: Role.Parent,
       });
+      this.snackBar.open(
+        'Signup Successful. Please login to continue.',
+        'Dismiss',
+        { duration: 5000 }
+      );
+      this.router.navigate(['auth/login']);
     }
   }
 }
