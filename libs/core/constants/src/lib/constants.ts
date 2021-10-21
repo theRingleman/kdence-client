@@ -5,4 +5,4 @@ export const householdsRoute = (): string => `${BASE_APP_URL}/households`;
 export const usersRoute = (householdId: number): string =>
   `${BASE_APP_URL}/households/${householdId}/users`;
 export const goalsRoute = (householdId: number): string =>
-  `${BASE_APP_URL}/households/${householdId}`;
+  `${BASE_APP_URL}/households/${householdId}/goals`;

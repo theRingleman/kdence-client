@@ -32,7 +32,7 @@ export class GoalFormComponent {
     if (this.goalsForm.valid) {
       this.submitted.emit({
         ...this.goalsForm.value,
-        userId: this.currentUser,
+        userId: this.currentUser.id,
       });
     }
   }

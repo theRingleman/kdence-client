@@ -1,0 +1,11 @@
+:host {
+  .goals-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    row-gap: 25px;
+    kdence-client-goal-card {
+      flex: 0 0 30%;
+    }
+  }
+}

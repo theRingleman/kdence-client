@@ -1,4 +1,8 @@
 <kdence-client-single-column-layout-with-optional-side-content>
-  <kdence-client-goal-card [goal]='goal'></kdence-client-goal-card>
-  <kdence-client-fab side-content><mat-icon>add</mat-icon></kdence-client-fab>
+  <div class='goals-wrapper'>
+    <ng-container *ngIf='goals$ | async as goals'>
+      <kdence-client-goal-card *ngFor='let goal of goals' [goal]='goal'></kdence-client-goal-card>
+    </ng-container>
+  </div>
+  <kdence-client-fab side-content routerLink='add'><mat-icon>add</mat-icon></kdence-client-fab>
 </kdence-client-single-column-layout-with-optional-side-content>

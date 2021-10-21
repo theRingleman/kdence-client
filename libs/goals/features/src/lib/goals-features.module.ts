@@ -8,6 +8,7 @@ import { ChildIndexComponent } from './child-index/child-index.component';
 import { GoalsUiModule } from '@kdence-client/goals/ui';
 import { CreateGoalComponent } from './create-goal/create-goal.component';
 import { MatIconModule } from '@angular/material/icon';
+import { GoalsDataAccessModule } from '@kdence-client/goals/data-access';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
     ]),
     GoalsUiModule,
     MatIconModule,
+    GoalsDataAccessModule,
   ],
   declarations: [
     ShellComponent,

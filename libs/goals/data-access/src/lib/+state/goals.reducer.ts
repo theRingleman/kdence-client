@@ -40,14 +40,14 @@ const goalsReducer = createReducer(
   on(GoalsActions.loadActiveGoalsSuccess, (state, { goals }) => ({
     ...state,
     activeGoals: {
-      goals: [...goals, ...state.activeGoals.goals],
+      goals: [...goals],
       loaded: true,
     },
   })),
   on(GoalsActions.loadCompletedGoalsSuccess, (state, { goals }) => ({
     ...state,
     completedGoals: {
-      goals: [...goals, ...state.completedGoals.goals],
+      goals: [...goals],
       loaded: true,
     },
   })),

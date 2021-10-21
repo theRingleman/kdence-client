@@ -8,8 +8,8 @@ export interface UsersEntity {
   firstName: string;
   lastName: string;
   email: string;
-  roles?: Role[];
-  household?: HouseholdsEntity;
+  household: HouseholdsEntity;
+  roles: Role[];
 }
 
 export interface CreateUserDto {
