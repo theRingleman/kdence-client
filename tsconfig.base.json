@@ -36,6 +36,12 @@
       ],
       "@kdence-client/households/ui": ["libs/households/ui/src/index.ts"],
       "@kdence-client/shared/ui": ["libs/shared/ui/src/index.ts"],
+      "@kdence-client/tasks/data-access": [
+        "libs/tasks/data-access/src/index.ts"
+      ],
+      "@kdence-client/tasks/features": ["libs/tasks/features/src/index.ts"],
+      "@kdence-client/tasks/models": ["libs/tasks/models/src/index.ts"],
+      "@kdence-client/tasks/ui": ["libs/tasks/ui/src/index.ts"],
       "@kdence-client/users/data-access": [
         "libs/users/data-access/src/index.ts"
       ],

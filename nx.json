@@ -86,6 +86,18 @@
     "shared-ui": {
       "tags": []
     },
+    "tasks-data-access": {
+      "tags": []
+    },
+    "tasks-features": {
+      "tags": []
+    },
+    "tasks-models": {
+      "tags": []
+    },
+    "tasks-ui": {
+      "tags": []
+    },
     "users-data-access": {
       "tags": ["scope:users", "type:data-access"]
     },

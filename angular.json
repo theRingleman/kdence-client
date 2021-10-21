@@ -562,6 +562,106 @@
         }
       }
     },
+    "tasks-data-access": {
+      "projectType": "library",
+      "root": "libs/tasks/data-access",
+      "sourceRoot": "libs/tasks/data-access/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tasks/data-access"],
+          "options": {
+            "jestConfig": "libs/tasks/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tasks/data-access/src/**/*.ts",
+              "libs/tasks/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "tasks-features": {
+      "projectType": "library",
+      "root": "libs/tasks/features",
+      "sourceRoot": "libs/tasks/features/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tasks/features"],
+          "options": {
+            "jestConfig": "libs/tasks/features/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tasks/features/src/**/*.ts",
+              "libs/tasks/features/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "tasks-models": {
+      "projectType": "library",
+      "root": "libs/tasks/models",
+      "sourceRoot": "libs/tasks/models/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tasks/models"],
+          "options": {
+            "jestConfig": "libs/tasks/models/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tasks/models/src/**/*.ts",
+              "libs/tasks/models/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "tasks-ui": {
+      "projectType": "library",
+      "root": "libs/tasks/ui",
+      "sourceRoot": "libs/tasks/ui/src",
+      "prefix": "kdence-client",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tasks/ui"],
+          "options": {
+            "jestConfig": "libs/tasks/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tasks/ui/src/**/*.ts",
+              "libs/tasks/ui/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "users-data-access": {
       "projectType": "library",
       "root": "libs/users/data-access",
