@@ -1,1 +1,24 @@
-<p>goal-form works!</p>
+<form [formGroup]='goalsForm'>
+  <div class="input-wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>Goal Name</mat-label>
+      <input type="text" matInput formControlName='name' placeholder="Your goals name">
+      <mat-error *ngIf="goalsForm.controls.name.invalid">Please provide a name.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Item</mat-label>
+      <input type="text" matInput formControlName='item' placeholder="What you want.">
+      <mat-error *ngIf="goalsForm.controls.item.invalid">Please provide what you are trying to get.</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="input-wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>Value</mat-label>
+      <span matPrefix>$</span>
+      <input type="number" matInput formControlName='completionValue' placeholder="100">
+      <span matSuffix>.00</span>
+      <mat-error *ngIf="goalsForm.controls.completionValue.invalid">How much is your item worth?</mat-error>
+    </mat-form-field>
+  </div>
+  <button mat-flat-button color="accent" (click)='create()'>Create</button>
+</form>

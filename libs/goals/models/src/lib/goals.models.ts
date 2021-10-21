@@ -7,3 +7,12 @@ export interface Goal {
   completionValue: number;
   earnedValue: number;
 }
+
+export interface CreateGoalDto {
+  name: string;
+  userId: number;
+  item: string;
+  completionValue: number;
+}
+
+export type GoalsEntity = Goal;

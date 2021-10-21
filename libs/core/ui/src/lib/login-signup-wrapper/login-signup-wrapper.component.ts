@@ -20,8 +20,6 @@ import { AuthFacade } from '@kdence-client/auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginSignupWrapperComponent {
-  redirectToLogin = 0;
-
   constructor(
     private usersFacade: UsersFacade,
     private householdsFacade: HouseholdsFacade,
@@ -35,6 +33,5 @@ export class LoginSignupWrapperComponent {
 
   signup(input: CreateUserDto) {
     this.householdsFacade.createHousehold(input);
-    this.redirectToLogin = 0;
   }
 }

@@ -6,14 +6,25 @@ import { SharedUiModule } from '@kdence-client/shared/ui';
 import { ParentIndexComponent } from './parent-index/parent-index.component';
 import { ChildIndexComponent } from './child-index/child-index.component';
 import { GoalsUiModule } from '@kdence-client/goals/ui';
+import { CreateGoalComponent } from './create-goal/create-goal.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedUiModule,
-    RouterModule.forChild([{ path: '', component: ShellComponent }]),
+    RouterModule.forChild([
+      { path: '', component: ShellComponent },
+      { path: 'add', component: CreateGoalComponent },
+    ]),
     GoalsUiModule,
+    MatIconModule,
   ],
-  declarations: [ShellComponent, ParentIndexComponent, ChildIndexComponent],
+  declarations: [
+    ShellComponent,
+    ParentIndexComponent,
+    ChildIndexComponent,
+    CreateGoalComponent,
+  ],
 })
 export class GoalsFeaturesModule {}

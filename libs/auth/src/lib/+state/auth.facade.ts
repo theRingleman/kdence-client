@@ -27,11 +27,13 @@ export class AuthFacade {
 
   login(dto: LoginInput) {
     this.store.dispatch(new Login(dto));
+    this.router.navigate(['/goals']);
   }
 
   logout() {
     this.jwtService.destroyToken();
     this.store.dispatch(new Logout());
+    this.router.navigate(['/auth/login']);
   }
 
   isLoggedIn() {

@@ -4,3 +4,5 @@ export const loginRoute = (): string => `${BASE_APP_URL}/auth/login`;
 export const householdsRoute = (): string => `${BASE_APP_URL}/households`;
 export const usersRoute = (householdId: number): string =>
   `${BASE_APP_URL}/households/${householdId}/users`;
+export const goalsRoute = (householdId: number): string =>
+  `${BASE_APP_URL}/households/${householdId}`;

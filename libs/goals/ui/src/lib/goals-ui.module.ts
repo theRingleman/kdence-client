@@ -8,6 +8,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { GoalFormComponent } from './goal-form/goal-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -16,6 +20,10 @@ import { GoalFormComponent } from './goal-form/goal-form.component';
     MatProgressBarModule,
     MatDividerModule,
     MatIconModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   declarations: [
     GoalCardComponent,
@@ -23,6 +31,11 @@ import { GoalFormComponent } from './goal-form/goal-form.component';
     GoalsListComponent,
     GoalFormComponent,
   ],
-  exports: [GoalsListComponent, GoalCardComponent, GoalsListComponent],
+  exports: [
+    GoalsListComponent,
+    GoalCardComponent,
+    GoalsListComponent,
+    GoalFormComponent,
+  ],
 })
 export class GoalsUiModule {}

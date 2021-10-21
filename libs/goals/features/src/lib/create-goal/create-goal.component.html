@@ -1,0 +1,6 @@
+<kdence-client-single-column-layout>
+  <kdence-client-form-wrapper *ngIf='currentUser$ | async as currentUser'>
+    <h1 title>Add a new Goal</h1>
+    <kdence-client-goal-form [currentUser]='currentUser' (submitted)='createGoal($event)'></kdence-client-goal-form>
+  </kdence-client-form-wrapper>
+</kdence-client-single-column-layout>

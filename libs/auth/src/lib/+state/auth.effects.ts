@@ -10,6 +10,7 @@ import {
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { UsersService } from '@kdence-client/users/data-access';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -20,7 +21,10 @@ export class AuthEffects {
         this.usersService
           .login(action.payload.email, action.payload.password)
           .pipe(
-            map(() => new LoginSuccess()),
+            map(() => {
+              this.router.navigate(['/goals']);
+              return new LoginSuccess();
+            }),
             catchError((error) => of(new LoginFailure(error)))
           )
       )
@@ -29,6 +33,7 @@ export class AuthEffects {
 
   constructor(
     private readonly actions$: Actions,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router
   ) {}
 }
