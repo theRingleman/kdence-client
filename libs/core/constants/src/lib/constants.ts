@@ -6,3 +6,5 @@ export const usersRoute = (householdId: number): string =>
   `${BASE_APP_URL}/households/${householdId}/users`;
 export const goalsRoute = (householdId: number): string =>
   `${BASE_APP_URL}/households/${householdId}/goals`;
+export const tasksRoute = (householdId: number, goalId: number): string =>
+  `${BASE_APP_URL}/households/${householdId}/goals/${goalId}`;

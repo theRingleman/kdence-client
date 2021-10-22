@@ -1,4 +1,4 @@
 <kdence-client-single-column-layout-with-optional-side-content>
   <kdence-client-household-list *ngIf='householdUsers$ | async as users' [users]='users'></kdence-client-household-list>
-  <kdence-client-fab side-content routerLink='./add-user'><mat-icon>add</mat-icon></kdence-client-fab>
+    <kdence-client-fab *ngIf='isParent' side-content routerLink='./add-user'><mat-icon>add</mat-icon></kdence-client-fab>
 </kdence-client-single-column-layout-with-optional-side-content>

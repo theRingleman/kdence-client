@@ -1,12 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewEncapsulation,
-  ChangeDetectionStrategy,
-  OnDestroy,
 } from '@angular/core';
 import { HouseholdsFacade } from '@kdence-client/households/data-access';
-import { UsersFacade } from '@kdence-client/users/data-access';
+import { Role, UsersFacade } from '@kdence-client/users/data-access';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 export class ShellComponent implements OnInit, OnDestroy {
   private currentUserSub!: Subscription;
   householdUsers$ = this.usersFacade.allUsers$;
+  isParent = false;
 
   constructor(
     public householdsFacade: HouseholdsFacade,
@@ -27,9 +28,10 @@ export class ShellComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUserSub = this.usersFacade.currentUser$.subscribe((user) => {
-      if (user !== null) {
-        this.householdsFacade.loadHousehold(user!.household!.id);
-        this.usersFacade.getHouseholdUsers(user!.household!.id);
+      if (user) {
+        this.householdsFacade.loadHousehold(user.household.id);
+        this.usersFacade.getHouseholdUsers(user.household.id);
+        this.isParent = !!user.roles.find((r) => r.name === Role.Parent);
       }
     });
   }

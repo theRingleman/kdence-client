@@ -8,7 +8,7 @@ import {
   LoginFailure,
 } from './auth.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { UsersService } from '@kdence-client/users/data-access';
+import { UsersFacade, UsersService } from '@kdence-client/users/data-access';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -22,7 +22,7 @@ export class AuthEffects {
           .login(action.payload.email, action.payload.password)
           .pipe(
             map(() => {
-              this.router.navigate(['/goals']);
+              this.usersFacade.loadUser();
               return new LoginSuccess();
             }),
             catchError((error) => of(new LoginFailure(error)))
@@ -34,6 +34,7 @@ export class AuthEffects {
   constructor(
     private readonly actions$: Actions,
     private usersService: UsersService,
-    private router: Router
+    private router: Router,
+    private usersFacade: UsersFacade
   ) {}
 }

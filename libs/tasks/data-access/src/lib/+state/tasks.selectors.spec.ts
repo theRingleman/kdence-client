@@ -8,7 +8,8 @@ describe('Tasks Selectors', () => {
   const createTasksEntity = (id: number, name = '') =>
     ({
       id,
-      name: name || `name-${id}`,
+      description: '',
+      value: 100,
     } as TasksEntity);
 
   let state: TasksPartialState;

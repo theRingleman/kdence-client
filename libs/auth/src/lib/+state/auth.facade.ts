@@ -10,24 +10,38 @@ import {
   UsersService,
 } from '@kdence-client/users/data-access';
 import { JwtService } from '@kdence-client/core/data-access';
-import { take } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthFacade {
   loggedIn$ = this.store.select(getLoggedIn);
+  error$ = this.store
+    .pipe(select(authQuery.getError), filter(Boolean))
+    .subscribe((error) => {
+      if (error instanceof HttpErrorResponse) {
+        this.snackBar.open(
+          'Invalid username or password, please try again.',
+          'Dismiss'
+        );
+      } else {
+        this.snackBar.open('Please login.', 'Dismiss');
+      }
+    });
 
   constructor(
     private readonly store: Store<AuthPartialState>,
     private jwtService: JwtService,
     private usersService: UsersService,
     private usersFacade: UsersFacade,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   login(dto: LoginInput) {
     this.store.dispatch(new Login(dto));
-    this.router.navigate(['/goals']);
   }
 
   logout() {
@@ -39,7 +53,7 @@ export class AuthFacade {
   isLoggedIn() {
     this.jwtService.getToken() !== ''
       ? this.attemptLogin()
-      : this.loginFailed({});
+      : this.loginFailed(new Error('Please login again.'));
   }
 
   private attemptLogin(): void {

@@ -4,7 +4,6 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { getGoalsMock } from '@kdence-client/goals/models';
 import { GoalsFacade } from '@kdence-client/goals/data-access';
 import { UsersFacade } from '@kdence-client/users/data-access';
 import { take } from 'rxjs/operators';

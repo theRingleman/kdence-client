@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { JwtService } from '@kdence-client/core/data-access';
-import { CreateUserDto, UsersEntity } from './users.models';
-import { filter, take } from 'rxjs/operators';
 import { getUsersLoaded } from './users.selectors';
+import { JwtService } from '@kdence-client/core/data-access';
+import { CreateUserDto, Role, UsersEntity } from './users.models';
+import { filter, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UsersFacade {

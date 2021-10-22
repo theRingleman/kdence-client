@@ -34,3 +34,15 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
+
+export const getSelectedGoalId = createSelector(
+  getTasksState,
+  (state: State) => state.selectedGoalId
+);
+
+export const getGoalsTasks = createSelector(
+  getTasksState,
+  getSelectedGoalId,
+  (state: State, selectedGoalId) =>
+    selectedGoalId ? state.goalTasks[selectedGoalId] : undefined
+);

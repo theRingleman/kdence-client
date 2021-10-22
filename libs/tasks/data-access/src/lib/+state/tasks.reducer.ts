@@ -5,11 +5,15 @@ import * as TasksActions from './tasks.actions';
 import { TasksEntity } from '@kdence-client/tasks/models';
 
 export const TASKS_FEATURE_KEY = 'tasks';
-
+export interface GoalTasks {
+  [id: number]: TasksEntity[];
+}
 export interface State extends EntityState<TasksEntity> {
   selectedId?: string | number; // which Tasks record has been selected
   loaded: boolean; // has the Tasks list been loaded
   error?: string | null; // last known error (if any)
+  goalTasks: GoalTasks;
+  selectedGoalId?: number;
 }
 
 export interface TasksPartialState {
@@ -22,6 +26,7 @@ export const tasksAdapter: EntityAdapter<TasksEntity> =
 export const initialState: State = tasksAdapter.getInitialState({
   // set initial required properties
   loaded: false,
+  goalTasks: {},
 });
 
 const tasksReducer = createReducer(

@@ -2,10 +2,10 @@
   .goals-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    row-gap: 25px;
+    justify-content: space-between;
     kdence-client-goal-card {
-      flex: 0 0 30%;
+      flex: 0 0 32%;
+      margin-bottom: 25px;
     }
   }
 }

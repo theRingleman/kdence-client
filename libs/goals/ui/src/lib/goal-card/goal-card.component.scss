@@ -16,6 +16,15 @@
     margin-top: 20px;
   }
 
+  .goal-name {
+    color: #102E4A;
+    &:hover {
+      transition: .3s;
+      color: #3f51b5;
+      cursor: pointer;
+    }
+  }
+
   .title-wrapper {
     display: flex;
     justify-content: space-between;

@@ -4,7 +4,9 @@ import { select, Store, Action } from '@ngrx/store';
 import * as GoalsActions from './goals.actions';
 import * as GoalsFeature from './goals.reducer';
 import * as GoalsSelectors from './goals.selectors';
-import { CreateGoalDto } from '@kdence-client/goals/models';
+import { CreateGoalDto, GoalsEntity } from '@kdence-client/goals/models';
+import { filter, first, map, switchMap, switchMapTo } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
 
 @Injectable()
 export class GoalsFacade {
@@ -17,6 +19,9 @@ export class GoalsFacade {
   selectedGoals$ = this.store.pipe(select(GoalsSelectors.getSelected));
   completedGoals$ = this.store.pipe(select(GoalsSelectors.getCompletedGoals));
   activeGoals$ = this.store.pipe(select(GoalsSelectors.getActiveGoals));
+  isActiveGoalsLoaded$ = this.store.pipe(
+    select(GoalsSelectors.isActiveGoalsLoaded)
+  );
 
   constructor(private readonly store: Store) {}
 
@@ -25,10 +30,41 @@ export class GoalsFacade {
   }
 
   loadActiveGoals(householdId: number) {
-    this.store.dispatch(GoalsActions.loadActiveGoals({ householdId }));
+    this.store
+      .select(GoalsSelectors.isActiveGoalsLoaded)
+      .subscribe((isLoaded) => {
+        if (!isLoaded)
+          this.store.dispatch(GoalsActions.loadActiveGoals({ householdId }));
+      });
   }
 
   loadCompletedGoals(householdId: number) {
     this.store.dispatch(GoalsActions.loadCompletedGoals({ householdId }));
+  }
+
+  getGoal(id: number): GoalsEntity {
+    let goal: GoalsEntity | undefined;
+    this.activeGoals$
+      .pipe(
+        switchMap((goals) => from(goals)),
+        filter((goal) => goal.id === id)
+      )
+      .subscribe((g) => (goal = g));
+    if (!goal) {
+      this.completedGoals$
+        .pipe(
+          switchMap((goals) => from(goals)),
+          filter((goal) => goal.id === id)
+        )
+        .subscribe((goalEntity) => (goal = goalEntity));
+    }
+    return goal!;
+  }
+
+  selectActiveGoal(id: number): Observable<GoalsEntity> {
+    return this.activeGoals$.pipe(
+      switchMap((goals) => from(goals)),
+      filter((goal) => goal.id === id)
+    );
   }
 }

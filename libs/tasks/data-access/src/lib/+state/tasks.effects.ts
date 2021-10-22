@@ -1,27 +1,66 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
-
 import * as TasksActions from './tasks.actions';
-import * as TasksFeature from './tasks.reducer';
+import { TasksService } from '../tasks.service';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class TasksEffects {
-  init$ = createEffect(() =>
+  $loadGoalTasks = createEffect(() =>
     this.actions$.pipe(
-      ofType(TasksActions.init),
-      fetch({
-        run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return TasksActions.loadTasksSuccess({ tasks: [] });
-        },
-        onError: (action, error) => {
-          console.error('Error', error);
-          return TasksActions.loadTasksFailure({ error });
-        },
-      })
+      ofType(TasksActions.loadTasksForGoal),
+      switchMap(({ goalId, householdId }) =>
+        this.tasksService.fetchTasksForGoal(householdId, goalId).pipe(
+          map((tasks) =>
+            TasksActions.loadTasksForGoalSuccess({ goalId, tasks })
+          ),
+          catchError((error) =>
+            of(TasksActions.loadTasksForGoalFailure({ error }))
+          )
+        )
+      )
     )
   );
 
-  constructor(private readonly actions$: Actions) {}
+  createTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TasksActions.createTask),
+      switchMap(({ goalId, householdId, dto }) =>
+        this.tasksService.createTask(goalId, householdId, dto).pipe(
+          map((task) => TasksActions.createTaskSuccess({ goalId, task })),
+          catchError((error) => of(TasksActions.createTaskFailure({ error })))
+        )
+      )
+    )
+  );
+
+  updateTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TasksActions.updateTask),
+      switchMap(({ goalId, householdId, task }) =>
+        this.tasksService.updateTask(goalId, householdId, task).pipe(
+          map((task) => TasksActions.updateTaskSuccess({ goalId, task })),
+          catchError((error) => of(TasksActions.updateTaskFailure({ error })))
+        )
+      )
+    )
+  );
+
+  approveTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TasksActions.approveTask),
+      switchMap(({ goalId, householdId, taskId }) =>
+        this.tasksService.approveTask(goalId, householdId, taskId).pipe(
+          map(() => TasksActions.approveTaskSuccess()),
+          catchError((error) => of(TasksActions.approveTaskFailure({ error })))
+        )
+      )
+    )
+  );
+
+  constructor(
+    private readonly actions$: Actions,
+    private tasksService: TasksService
+  ) {}
 }

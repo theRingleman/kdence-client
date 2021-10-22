@@ -9,7 +9,7 @@ export interface UsersEntity {
   lastName: string;
   email: string;
   household: HouseholdsEntity;
-  roles: Role[];
+  roles: RoleEntity[];
 }
 
 export interface CreateUserDto {
@@ -27,6 +27,11 @@ export interface LoginResponse {
 export interface LoginInput {
   email: string;
   password: string;
+}
+
+export interface RoleEntity {
+  id: number;
+  name: Role;
 }
 
 export enum Role {

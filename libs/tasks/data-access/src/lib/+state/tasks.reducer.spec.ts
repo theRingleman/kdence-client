@@ -7,7 +7,8 @@ import { TasksEntity } from '@kdence-client/tasks/models';
 describe('Tasks Reducer', () => {
   const createTasksEntity = (id: number, name = ''): TasksEntity => ({
     id,
-    name: name || `name-${id}`,
+    description: '',
+    value: 100,
   });
 
   describe('valid Tasks actions', () => {

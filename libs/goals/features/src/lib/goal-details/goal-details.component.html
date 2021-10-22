@@ -1,0 +1,6 @@
+<kdence-client-single-column-layout-with-optional-side-content>
+  <ng-container *ngIf='areActiveGoalsLoaded$ | async'>
+    <kdence-client-goal-card *ngIf='goal$ | async as goal' [goal]='goal'></kdence-client-goal-card>
+    <kdence-client-task-list></kdence-client-task-list>
+  </ng-container>
+</kdence-client-single-column-layout-with-optional-side-content>
