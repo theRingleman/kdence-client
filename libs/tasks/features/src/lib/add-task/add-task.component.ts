@@ -44,7 +44,6 @@ export class AddTaskComponent implements OnInit {
     if (this.goalId) {
       this.tasksFacade.createTask(this.goalId, {
         ...createTaskDto,
-        value: createTaskDto.value * 100,
       });
     }
     this.router.navigate(['goals']);

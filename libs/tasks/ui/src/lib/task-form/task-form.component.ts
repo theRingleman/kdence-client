@@ -34,17 +34,10 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     this.subscription = this.taskControlService.selectedTask$.subscribe(
       (task) => {
         this.task = task;
-        if (task.value !== 0) {
-          this.taskForm = this.fb.group({
-            description: [task.description, Validators.required],
-            value: [task.value / 100, Validators.required],
-          });
-        } else {
-          this.taskForm = this.fb.group({
-            description: [task.description, Validators.required],
-            value: [task.value, Validators.required],
-          });
-        }
+        this.taskForm = this.fb.group({
+          description: [task.description, Validators.required],
+          value: [task.value / 100, Validators.required],
+        });
       }
     );
   }
