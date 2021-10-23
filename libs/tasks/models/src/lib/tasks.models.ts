@@ -17,7 +17,6 @@ export interface TaskApproval {
 export interface CreateTaskDto {
   description: string;
   value: number;
-  userId: number;
 }
 
 export type TasksEntity = Task;

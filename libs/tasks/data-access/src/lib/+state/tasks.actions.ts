@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateTaskDto, TasksEntity } from '@kdence-client/tasks/models';
+import { CreateTaskDto, Task, TasksEntity } from '@kdence-client/tasks/models';
 
 export const init = createAction('[Tasks Page] Init');
 
@@ -13,13 +13,18 @@ export const loadTasksFailure = createAction(
   props<{ error: any }>()
 );
 
+export const setSelectedGoalId = createAction(
+  '[Tasks/API] Set Selected Goal Id',
+  props<{ goalId: number }>()
+);
+
 export const loadTasksForGoal = createAction(
-  '[Tasks/API] Load Tasks Success',
-  props<{ goalId: number; householdId: number }>()
+  '[Tasks/API] Load Tasks For Goal',
+  props<{ goalId: number }>()
 );
 
 export const loadTasksForGoalSuccess = createAction(
-  '[Tasks/API] Load Tasks Success',
+  '[Tasks/API] Load Tasks For Goal Success',
   props<{ goalId: number; tasks: TasksEntity[] }>()
 );
 
@@ -30,7 +35,7 @@ export const loadTasksForGoalFailure = createAction(
 
 export const createTask = createAction(
   '[Tasks/API] Create Task',
-  props<{ householdId: number; goalId: number; dto: CreateTaskDto }>()
+  props<{ goalId: number; dto: CreateTaskDto }>()
 );
 
 export const createTaskSuccess = createAction(
@@ -45,7 +50,7 @@ export const createTaskFailure = createAction(
 
 export const updateTask = createAction(
   '[Tasks/API] Update Task',
-  props<{ householdId: number; goalId: number; task: TasksEntity }>()
+  props<{ goalId: number; task: TasksEntity }>()
 );
 
 export const updateTaskSuccess = createAction(
@@ -60,7 +65,7 @@ export const updateTaskFailure = createAction(
 
 export const approveTask = createAction(
   '[Tasks/API] Approve Task',
-  props<{ householdId: number; goalId: number; taskId: number }>()
+  props<{ goalId: number; task: TasksEntity }>()
 );
 
 export const approveTaskSuccess = createAction(
@@ -69,5 +74,34 @@ export const approveTaskSuccess = createAction(
 
 export const approveTaskFailure = createAction(
   '[Tasks/API] Approve Task Failure',
+  props<{ error: any }>()
+);
+
+export const fetchTask = createAction(
+  '[Tasks/API] Fetch Task',
+  props<{ goalId: number; taskId: number }>()
+);
+
+export const fetchTaskSuccess = createAction(
+  '[Tasks/API] Fetch Task Success',
+  props<{ task: TasksEntity }>()
+);
+
+export const fetchTaskFailure = createAction(
+  '[Tasks/API] Fetch Task Failure',
+  props<{ error: any }>()
+);
+
+export const deleteTask = createAction(
+  '[Tasks/API] Delete Task',
+  props<{ goalId: number; taskId: number }>()
+);
+
+export const deleteTaskSuccess = createAction(
+  '[Tasks/API] Delete Task Success'
+);
+
+export const deleteTaskFailure = createAction(
+  '[Tasks/API] Delete Task Failure',
   props<{ error: any }>()
 );

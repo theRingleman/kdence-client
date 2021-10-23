@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title class='title-wrapper'>
     <div>
-      <mat-icon>flag</mat-icon> Goal: <span class='goal-name' [routerLink]="['/goals', goal.id]">{{goal.name}}</span>
+      <mat-icon>flag</mat-icon> Goal: <span class='goal-name' (click)='goalSelected(goal)' [routerLink]="['/goals', goal.id]" >{{goal.name}}</span>
     </div>
     <div>
       <mat-icon [ngClass]="isComplete ? 'complete' : 'incomplete'">check_circle_outline</mat-icon>

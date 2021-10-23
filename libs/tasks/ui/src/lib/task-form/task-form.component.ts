@@ -1,10 +1,16 @@
 import {
   Component,
-  OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TasksEntity } from '@kdence-client/tasks/models';
+import { Subscription } from 'rxjs';
+import { TaskControlService } from '@kdence-client/tasks/data-access';
 
 @Component({
   selector: 'kdence-client-task-form',
@@ -13,17 +19,47 @@ import { FormBuilder, Validators } from '@angular/forms';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskFormComponent implements OnInit {
-  taskForm = this.fb.group({
-    description: ['', Validators.required],
-    value: ['', Validators.required, Validators.required],
-  });
+export class TaskFormComponent implements OnInit, OnDestroy {
+  private subscription!: Subscription;
+  private task!: TasksEntity;
+  taskForm!: FormGroup;
+  @Output() submittedEvent = new EventEmitter<TasksEntity>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private taskControlService: TaskControlService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscription = this.taskControlService.selectedTask$.subscribe(
+      (task) => {
+        this.task = task;
+        if (task.value !== 0) {
+          this.taskForm = this.fb.group({
+            description: [task.description, Validators.required],
+            value: [task.value / 100, Validators.required],
+          });
+        } else {
+          this.taskForm = this.fb.group({
+            description: [task.description, Validators.required],
+            value: [task.value, Validators.required],
+          });
+        }
+      }
+    );
+  }
 
   submitted() {
-    console.log(this.taskForm.value);
+    if (this.taskForm.valid) {
+      this.submittedEvent.emit({
+        ...this.task,
+        ...this.taskForm.value,
+        value: this.taskForm.value.value * 100,
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

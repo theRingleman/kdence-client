@@ -8,6 +8,7 @@ import { UsersFacade } from '@kdence-client/users/data-access';
 import { CreateGoalDto } from '@kdence-client/goals/models';
 import { GoalsFacade } from '@kdence-client/goals/data-access';
 import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'kdence-client-create-goal',
@@ -21,7 +22,8 @@ export class CreateGoalComponent {
 
   constructor(
     private usersFacade: UsersFacade,
-    private goalsFacade: GoalsFacade
+    private goalsFacade: GoalsFacade,
+    private router: Router
   ) {}
 
   createGoal(dto: CreateGoalDto) {
@@ -36,6 +38,7 @@ export class CreateGoalComponent {
         ...dto,
         completionValue: dto.completionValue * 100,
       });
+      this.router.navigate(['goals']);
     }
   }
 }

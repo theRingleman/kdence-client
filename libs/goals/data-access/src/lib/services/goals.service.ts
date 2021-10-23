@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { goalsRoute } from '@kdence-client/core/constants';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CreateGoalDto, GoalsEntity } from '@kdence-client/goals/models';
 
 @Injectable({
@@ -9,6 +9,13 @@ import { CreateGoalDto, GoalsEntity } from '@kdence-client/goals/models';
 })
 export class GoalsService {
   constructor(private http: HttpClient) {}
+
+  private selectedGoalSubject = new BehaviorSubject<GoalsEntity>({} as any);
+  selectedGoal$ = this.selectedGoalSubject.asObservable();
+
+  selectGoal(goal: GoalsEntity) {
+    this.selectedGoalSubject.next(goal);
+  }
 
   fetchGoal(householdId: number, goalId: number): Observable<GoalsEntity> {
     return this.http.get<GoalsEntity>(`${goalsRoute(householdId)}/${goalId}`);

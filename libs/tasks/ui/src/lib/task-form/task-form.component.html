@@ -1,17 +1,19 @@
 <form [formGroup]='taskForm'>
   <div class="input-wrapper">
     <mat-form-field appearance="fill">
-      <mat-label>Goal Name</mat-label>
-      <input type="text" matInput formControlName='name' placeholder="Your goals name">
+      <mat-label>Task Description</mat-label>
+      <input type="text" matInput formControlName='description' placeholder="What needs to be done?">
       <mat-error *ngIf="taskForm.controls.description.invalid">Please provide what needs to be done.</mat-error>
     </mat-form-field>
+  </div>
+  <div class='input-wrapper'>
     <mat-form-field appearance="fill">
-      <mat-label>Item</mat-label>
+      <mat-label>Value</mat-label>
       <span matPrefix>$</span>
-      <input type="number" matInput formControlName='item' placeholder="100">
+      <input type="number" matInput formControlName='value' placeholder="100">
       <span matSuffix>.00</span>
       <mat-error *ngIf="taskForm.controls.value.invalid">Please provide a value.</mat-error>
     </mat-form-field>
   </div>
-  <button mat-flat-button color="accent" (click)='submitted()'>Create</button>
+  <button mat-flat-button color="accent" (click)='submitted()'>Submit</button>
 </form>

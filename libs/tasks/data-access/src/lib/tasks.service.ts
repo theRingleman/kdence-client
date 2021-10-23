@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tasksRoute } from '@kdence-client/core/constants';
 import { Observable } from 'rxjs';
-import { CreateTaskDto, TasksEntity } from '@kdence-client/tasks/models';
+import { CreateTaskDto, Task, TasksEntity } from '@kdence-client/tasks/models';
 
 @Injectable({
   providedIn: 'root',
@@ -10,36 +10,31 @@ import { CreateTaskDto, TasksEntity } from '@kdence-client/tasks/models';
 export class TasksService {
   constructor(private http: HttpClient) {}
 
-  fetchTasksForGoal(
-    householdId: number,
-    goalId: number
-  ): Observable<TasksEntity[]> {
-    return this.http.get<TasksEntity[]>(tasksRoute(householdId, goalId));
+  fetchTasksForGoal(goalId: number): Observable<TasksEntity[]> {
+    return this.http.get<TasksEntity[]>(tasksRoute(goalId));
   }
 
-  createTask(
-    householdId: number,
-    goalId: number,
-    dto: CreateTaskDto
-  ): Observable<TasksEntity> {
-    return this.http.post<TasksEntity>(tasksRoute(householdId, goalId), {
+  createTask(goalId: number, dto: CreateTaskDto): Observable<TasksEntity> {
+    return this.http.post<TasksEntity>(tasksRoute(goalId), {
       ...dto,
     });
   }
 
-  updateTask(
-    householdId: number,
-    goalId: number,
-    task: TasksEntity
-  ): Observable<TasksEntity> {
-    return this.http.patch<TasksEntity>(tasksRoute(householdId, goalId), {
+  updateTask(goalId: number, task: TasksEntity): Observable<TasksEntity> {
+    return this.http.patch<TasksEntity>(`${tasksRoute(goalId)}/${task.id}`, {
       ...task,
     });
   }
 
-  approveTask(goalId: number, householdId: number, taskId: number) {
-    return this.http.get(
-      `${tasksRoute(householdId, goalId)}/tasks/${taskId}/approve`
-    );
+  approveTask(goalId: number, task: TasksEntity) {
+    return this.http.get(`${tasksRoute(goalId)}/${task.id}/approve`);
+  }
+
+  fetchTask(goalId: number, taskId: number): Observable<TasksEntity> {
+    return this.http.get<TasksEntity>(`${tasksRoute(goalId)}/${taskId}`);
+  }
+
+  deleteTask(goalId: number, taskId: number) {
+    return this.http.delete(`${tasksRoute(goalId)}/${taskId}`);
   }
 }

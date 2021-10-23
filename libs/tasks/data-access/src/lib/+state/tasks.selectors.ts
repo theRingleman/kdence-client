@@ -44,5 +44,10 @@ export const getGoalsTasks = createSelector(
   getTasksState,
   getSelectedGoalId,
   (state: State, selectedGoalId) =>
-    selectedGoalId ? state.goalTasks[selectedGoalId] : undefined
+    selectedGoalId ? state.goalTasks[selectedGoalId] : []
+);
+
+export const getFetchedTask = createSelector(
+  getTasksState,
+  (state: State) => state.fetchedTask
 );

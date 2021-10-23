@@ -1,16 +1,26 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewEncapsulation,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { GoalsFacade } from '@kdence-client/goals/data-access';
-import { UsersFacade } from '@kdence-client/users/data-access';
+import {
+  Role,
+  UsersEntity,
+  UsersFacade,
+} from '@kdence-client/users/data-access';
+import { take, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import {
+  TaskControlService,
+  TasksFacade,
+} from '@kdence-client/tasks/data-access';
+import { TasksEntity } from '@kdence-client/tasks/models';
+import { GoalsService } from '@kdence-client/goals/data-access';
 import { GoalsEntity } from '@kdence-client/goals/models';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { TasksFacade } from '../../../../../tasks/data-access/src/lib/+state/tasks.facade';
+import { getNullTask } from '@kdence-client/core/utils';
 
 @Component({
   selector: 'kdence-client-goal-details',
@@ -19,28 +29,66 @@ import { TasksFacade } from '../../../../../tasks/data-access/src/lib/+state/tas
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoalDetailsComponent implements OnInit {
-  id$!: Observable<number>;
-  goal$!: Observable<GoalsEntity>;
-  areActiveGoalsLoaded$ = this.goalsFacade.isActiveGoalsLoaded$;
+export class GoalDetailsComponent implements OnInit, OnDestroy {
+  isParent = false;
+  tasks$ = this.tasksFacade.selectedGoalTasks$;
+  selectedGoal!: GoalsEntity;
+  currentUser!: UsersEntity;
+  private currentUserSubscription!: Subscription;
+  private selectedGoalSubscription!: Subscription;
 
   constructor(
     private goalsFacade: GoalsFacade,
     private usersFacade: UsersFacade,
     private tasksFacade: TasksFacade,
-    private router: Router,
-    private route: ActivatedRoute
+    private goalsService: GoalsService,
+    private taskControlService: TaskControlService
   ) {}
 
   ngOnInit(): void {
-    this.usersFacade.currentUser$.pipe(take(1)).subscribe((user) => {
-      if (user) this.goalsFacade.loadActiveGoals(user.household.id);
-    });
-    this.id$ = this.route.paramMap.pipe(
-      map((params) => Number(params.get('id')))
-    );
-    this.id$.subscribe(
-      (id) => (this.goal$ = this.goalsFacade.selectActiveGoal(id))
-    );
+    this.selectedGoalSubscription = this.goalsService.selectedGoal$
+      .pipe(
+        tap((goal) => {
+          this.selectedGoal = goal;
+          this.tasksFacade.loadTasks(goal.id);
+          this.tasksFacade.getGoalTasks(goal.id);
+        })
+      )
+      .subscribe();
+    this.currentUserSubscription = this.usersFacade.currentUser$
+      .pipe(take(1))
+      .subscribe((user) => {
+        if (user) {
+          this.currentUser = user;
+          this.isParent = !!user.roles.find(
+            (role) => role.name === Role.Parent
+          );
+          this.goalsFacade.loadActiveGoals(user.household.id);
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.selectedGoalSubscription.unsubscribe();
+    this.currentUserSubscription.unsubscribe();
+  }
+
+  taskComplete($event: TasksEntity) {
+    this.tasksFacade.completeTask(this.selectedGoal.id, $event);
+  }
+
+  taskApproved($event: TasksEntity) {
+    if (
+      this.isParent &&
+      $event.approval === null &&
+      $event.completionDate !== null
+    ) {
+      this.tasksFacade.approveTask(this.selectedGoal.id, $event);
+      this.goalsFacade.loadActiveGoals(this.currentUser.household.id);
+    }
+  }
+
+  resetTask() {
+    this.taskControlService.selectTask(getNullTask());
   }
 }

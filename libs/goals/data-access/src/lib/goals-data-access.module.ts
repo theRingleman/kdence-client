@@ -5,7 +5,6 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromGoals from './+state/goals.reducer';
 import { GoalsEffects } from './+state/goals.effects';
 import { GoalsFacade } from './+state/goals.facade';
-import { GoalsService } from './services/goals.service';
 
 @NgModule({
   imports: [
@@ -13,6 +12,6 @@ import { GoalsService } from './services/goals.service';
     StoreModule.forFeature(fromGoals.GOALS_FEATURE_KEY, fromGoals.reducer),
     EffectsModule.forFeature([GoalsEffects]),
   ],
-  providers: [GoalsFacade, GoalsService],
+  providers: [GoalsFacade],
 })
 export class GoalsDataAccessModule {}

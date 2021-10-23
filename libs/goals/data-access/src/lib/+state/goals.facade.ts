@@ -30,12 +30,7 @@ export class GoalsFacade {
   }
 
   loadActiveGoals(householdId: number) {
-    this.store
-      .select(GoalsSelectors.isActiveGoalsLoaded)
-      .subscribe((isLoaded) => {
-        if (!isLoaded)
-          this.store.dispatch(GoalsActions.loadActiveGoals({ householdId }));
-      });
+    this.store.dispatch(GoalsActions.loadActiveGoals({ householdId }));
   }
 
   loadCompletedGoals(householdId: number) {

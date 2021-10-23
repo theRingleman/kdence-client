@@ -5,8 +5,9 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
-import { Goal } from '@kdence-client/goals/models';
-import { ActivatedRoute, Router } from '@angular/router';
+import { GoalsEntity } from '@kdence-client/goals/models';
+import { Router } from '@angular/router';
+import { GoalsService } from '@kdence-client/goals/data-access';
 
 @Component({
   selector: 'kdence-client-goal-card',
@@ -16,15 +17,21 @@ import { ActivatedRoute, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalCardComponent implements OnInit {
-  @Input() goal!: Goal;
+  @Input() goal!: GoalsEntity;
 
   isComplete!: boolean;
   id!: number;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private goalsService: GoalsService) {}
 
   ngOnInit(): void {
-    this.isComplete = this.goal.completionValue <= this.goal.earnedValue;
-    this.route.queryParams.subscribe((params) => (this.id = params['id']));
+    if (this.goal) {
+      this.isComplete = this.goal.completionValue <= this.goal.earnedValue;
+    }
+  }
+
+  goalSelected(goal: GoalsEntity) {
+    this.goalsService.selectGoal(goal);
+    this.router.navigate([`goals/${goal.id}`]);
   }
 }

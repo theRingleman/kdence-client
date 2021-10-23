@@ -46,7 +46,7 @@ export class GoalsEffects {
       ofType(GoalsActions.createGoal),
       switchMap(({ householdId, goalDto }) =>
         this.goalsService.createGoal(householdId, goalDto).pipe(
-          map((goal) => GoalsActions.createGoalSuccess({ goal })),
+          map(() => GoalsActions.loadActiveGoals({ householdId })),
           catchError((error) => of(GoalsActions.createGoalFailure({ error })))
         )
       )

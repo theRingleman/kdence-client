@@ -14,6 +14,7 @@ export interface State extends EntityState<TasksEntity> {
   error?: string | null; // last known error (if any)
   goalTasks: GoalTasks;
   selectedGoalId?: number;
+  fetchedTask: TasksEntity | null;
 }
 
 export interface TasksPartialState {
@@ -27,6 +28,7 @@ export const initialState: State = tasksAdapter.getInitialState({
   // set initial required properties
   loaded: false,
   goalTasks: {},
+  fetchedTask: null,
 });
 
 const tasksReducer = createReducer(
@@ -35,7 +37,22 @@ const tasksReducer = createReducer(
   on(TasksActions.loadTasksSuccess, (state, { tasks }) =>
     tasksAdapter.setAll(tasks, { ...state, loaded: true })
   ),
-  on(TasksActions.loadTasksFailure, (state, { error }) => ({ ...state, error }))
+  on(TasksActions.loadTasksFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+  on(TasksActions.loadTasksForGoalSuccess, (state, { goalId, tasks }) => ({
+    ...state,
+    goalTasks: { ...state.goalTasks, [goalId]: tasks },
+  })),
+  on(TasksActions.setSelectedGoalId, (state, { goalId }) => ({
+    ...state,
+    selectedGoalId: goalId,
+  })),
+  on(TasksActions.fetchTaskSuccess, (state, { task }) => ({
+    ...state,
+    fetchedTask: { ...task },
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

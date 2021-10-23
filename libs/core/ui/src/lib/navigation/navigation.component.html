@@ -5,13 +5,10 @@
   <mat-menu #menu>
     <button mat-menu-item routerLink='households'>Household</button>
     <button mat-menu-item routerLink='goals'>Goals</button>
-    <button mat-menu-item>Tasks</button>
   </mat-menu>
   <button mat-button class="home" routerLink='/goals'>Kdence</button>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
+  <span *ngIf='user'>Welcome {{ user.firstName }}</span>
   <button *ngIf='loggedIn' mat-icon-button class="example-icon" (click)='logout()'>
     <mat-icon>logout</mat-icon>
   </button>

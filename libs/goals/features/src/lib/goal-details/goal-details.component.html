@@ -1,6 +1,13 @@
 <kdence-client-single-column-layout-with-optional-side-content>
-  <ng-container *ngIf='areActiveGoalsLoaded$ | async'>
-    <kdence-client-goal-card *ngIf='goal$ | async as goal' [goal]='goal'></kdence-client-goal-card>
-    <kdence-client-task-list></kdence-client-task-list>
+    <kdence-client-goal-card [goal]='selectedGoal'></kdence-client-goal-card>
+      <kdence-client-task-list
+        *ngIf='tasks$ | async as tasks'
+        [tasks]='tasks'
+        (completionEvent)='taskComplete($event)'
+        (approvalEvent)='taskApproved($event)'
+      ></kdence-client-task-list>
+
+  <ng-container side-content *ngIf='isParent'>
+    <kdence-client-fab (click)='resetTask()' routerLink='tasks/add'><mat-icon>add</mat-icon></kdence-client-fab>
   </ng-container>
 </kdence-client-single-column-layout-with-optional-side-content>

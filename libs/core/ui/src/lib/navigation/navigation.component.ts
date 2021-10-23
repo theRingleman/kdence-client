@@ -7,6 +7,7 @@ import {
   Input,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsersEntity } from '@kdence-client/users/data-access';
 
 @Component({
   selector: 'kdence-client-navigation',
@@ -18,6 +19,7 @@ import { Router } from '@angular/router';
 export class NavigationComponent {
   @Output() logoutEvent = new EventEmitter();
   @Input() loggedIn!: boolean | null;
+  @Input() user: UsersEntity | null = null;
 
   constructor(private router: Router) {}
 

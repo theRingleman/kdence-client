@@ -1,6 +1,9 @@
 <kdence-client-single-column-layout-with-optional-side-content>
   <div class='goals-wrapper'>
     <ng-container *ngIf='goals$ | async as goals'>
+      <ng-container *ngIf='goals.length === 0'>
+        <h2>Looks pretty empty in here, lets add a new Goal and get to work!</h2>
+      </ng-container>
       <kdence-client-goal-card *ngFor='let goal of goals' [goal]='goal'></kdence-client-goal-card>
     </ng-container>
   </div>

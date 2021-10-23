@@ -4,14 +4,15 @@ import * as TasksActions from './tasks.actions';
 import { TasksService } from '../tasks.service';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class TasksEffects {
   $loadGoalTasks = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.loadTasksForGoal),
-      switchMap(({ goalId, householdId }) =>
-        this.tasksService.fetchTasksForGoal(householdId, goalId).pipe(
+      switchMap(({ goalId }) =>
+        this.tasksService.fetchTasksForGoal(goalId).pipe(
           map((tasks) =>
             TasksActions.loadTasksForGoalSuccess({ goalId, tasks })
           ),
@@ -26,9 +27,12 @@ export class TasksEffects {
   createTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.createTask),
-      switchMap(({ goalId, householdId, dto }) =>
-        this.tasksService.createTask(goalId, householdId, dto).pipe(
-          map((task) => TasksActions.createTaskSuccess({ goalId, task })),
+      switchMap(({ goalId, dto }) =>
+        this.tasksService.createTask(goalId, dto).pipe(
+          map((task) => {
+            TasksActions.loadTasksForGoal({ goalId });
+            return TasksActions.createTaskSuccess({ goalId, task });
+          }),
           catchError((error) => of(TasksActions.createTaskFailure({ error })))
         )
       )
@@ -38,8 +42,8 @@ export class TasksEffects {
   updateTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.updateTask),
-      switchMap(({ goalId, householdId, task }) =>
-        this.tasksService.updateTask(goalId, householdId, task).pipe(
+      switchMap(({ goalId, task }) =>
+        this.tasksService.updateTask(goalId, task).pipe(
           map((task) => TasksActions.updateTaskSuccess({ goalId, task })),
           catchError((error) => of(TasksActions.updateTaskFailure({ error })))
         )
@@ -50,8 +54,8 @@ export class TasksEffects {
   approveTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TasksActions.approveTask),
-      switchMap(({ goalId, householdId, taskId }) =>
-        this.tasksService.approveTask(goalId, householdId, taskId).pipe(
+      switchMap(({ goalId, task }) =>
+        this.tasksService.approveTask(goalId, task).pipe(
           map(() => TasksActions.approveTaskSuccess()),
           catchError((error) => of(TasksActions.approveTaskFailure({ error })))
         )
@@ -59,8 +63,37 @@ export class TasksEffects {
     )
   );
 
+  fetchTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TasksActions.fetchTask),
+      switchMap(({ goalId, taskId }) =>
+        this.tasksService.fetchTask(goalId, taskId).pipe(
+          map((task) => TasksActions.fetchTaskSuccess({ task })),
+          catchError((error) => of(TasksActions.fetchTaskFailure({ error })))
+        )
+      )
+    )
+  );
+
+  deleteTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TasksActions.deleteTask),
+      switchMap(({ goalId, taskId }) =>
+        this.tasksService.deleteTask(goalId, taskId).pipe(
+          map(() => {
+            this.snackBar.open('Task Deleted Successfully', 'Dismiss', {
+              duration: 3000,
+            });
+            return TasksActions.deleteTaskSuccess();
+          }),
+          catchError((error) => of(TasksActions.fetchTaskFailure({ error })))
+        )
+      )
+    )
+  );
   constructor(
     private readonly actions$: Actions,
-    private tasksService: TasksService
+    private tasksService: TasksService,
+    private snackBar: MatSnackBar
   ) {}
 }

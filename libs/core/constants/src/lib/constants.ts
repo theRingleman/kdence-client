@@ -1,4 +1,4 @@
-export const BASE_APP_URL = 'http://localhost:3000';
+export const BASE_APP_URL = 'https://kdence.herokuapp.com';
 export const profileRoute = (): string => `${BASE_APP_URL}/profile`;
 export const loginRoute = (): string => `${BASE_APP_URL}/auth/login`;
 export const householdsRoute = (): string => `${BASE_APP_URL}/households`;
@@ -6,5 +6,5 @@ export const usersRoute = (householdId: number): string =>
   `${BASE_APP_URL}/households/${householdId}/users`;
 export const goalsRoute = (householdId: number): string =>
   `${BASE_APP_URL}/households/${householdId}/goals`;
-export const tasksRoute = (householdId: number, goalId: number): string =>
-  `${BASE_APP_URL}/households/${householdId}/goals/${goalId}`;
+export const tasksRoute = (goalId: number): string =>
+  `${BASE_APP_URL}/goals/${goalId}/tasks`;

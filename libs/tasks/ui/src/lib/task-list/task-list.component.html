@@ -3,9 +3,9 @@
     <th mat-header-cell *matHeaderCellDef> Complete </th>
     <td mat-cell *matCellDef="let row">
       <mat-checkbox
-        (click)="$event.stopPropagation()"
-        (change)="$event ? selection.toggle(row) : null"
-        [checked]="selection.isSelected(row.complete)"
+        (click)="completionEvent.emit(row)"
+        [checked]="row.completionDate !== null"
+        [disabled]='row.completionDate !== null'
       >
       </mat-checkbox>
     </td>
@@ -13,23 +13,34 @@
 
   <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef> Description </th>
-    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    <td mat-cell *matCellDef="let element">
+        <span class='description'>{{element.description}}</span>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="value">
     <th mat-header-cell *matHeaderCellDef> Value </th>
-    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.value / 100 | currency}} </td>
   </ng-container>
 
   <ng-container matColumnDef="approved">
     <th mat-header-cell *matHeaderCellDef> Approved </th>
     <td mat-cell *matCellDef="let row">
-      <mat-checkbox
-        (click)="$event.stopPropagation()"
-        (change)="$event ? selection.toggle(row) : null"
-        [checked]="selection.isSelected(row.approved)"
-      >
-      </mat-checkbox>
+      <div class='approval-wrapper'>
+        <mat-checkbox
+          (click)="approvalEvent.emit(row)"
+          [checked]="row.approval !== null"
+          [disabled]='(row.completionDate === null || row.approval !== null) || !isParent'
+        >
+        </mat-checkbox>
+        <ng-container *ngIf='isParent'>
+          <span class='spacer'></span>
+          <span class='icon-wrapper'>
+            <span><small (click)='editEvent(row)'><mat-icon>edit</mat-icon></small></span>
+            <span><small (click)='deleteEvent(row)'><mat-icon>delete</mat-icon></small></span>
+          </span>
+        </ng-container>
+      </div>
     </td>
   </ng-container>
 

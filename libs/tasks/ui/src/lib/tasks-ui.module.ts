@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatTableModule,
     MatCheckboxModule,
+    RouterModule,
   ],
   declarations: [TaskFormComponent, TaskListComponent],
   exports: [TaskFormComponent, TaskListComponent],
