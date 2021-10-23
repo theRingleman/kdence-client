@@ -27,8 +27,9 @@ export class AuthFacade {
           'Dismiss'
         );
       } else {
-        this.snackBar.open('Please login.', 'Dismiss');
+        this.snackBar.open('Please login.', 'Dismiss', { duration: 5000 });
       }
+      this.router.navigate(['auth/login']);
     });
 
   constructor(
