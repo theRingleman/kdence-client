@@ -19,7 +19,6 @@ import { ofType } from '@ngrx/effects';
 import { Subscription } from 'rxjs';
 import { ActionsSubject } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'kdence-client-shell',
@@ -50,6 +49,10 @@ export class ShellComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loggedInSub = this.actionsSubject
       .pipe(ofType(loadCurrentUserSuccess))
-      .subscribe(() => this.router.navigate(['goals']));
+      .subscribe((user) => {
+        user
+          ? this.router.navigate(['goals'])
+          : this.router.navigate(['auth/login']);
+      });
   }
 }
