@@ -35,6 +35,7 @@
         "libs/households/feature/src/index.ts"
       ],
       "@kdence-client/households/ui": ["libs/households/ui/src/index.ts"],
+      "@kdence-client/reports/ui": ["libs/reports/ui/src/index.ts"],
       "@kdence-client/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@kdence-client/tasks/data-access": [
         "libs/tasks/data-access/src/index.ts"

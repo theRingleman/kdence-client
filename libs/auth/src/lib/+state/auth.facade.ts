@@ -48,6 +48,7 @@ export class AuthFacade {
   logout() {
     this.jwtService.destroyToken();
     this.store.dispatch(new Logout());
+    this.usersFacade.clearCurrentUser();
     this.router.navigate(['/auth/login']);
   }
 
