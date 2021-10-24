@@ -31,6 +31,14 @@ const routes: Routes = [
           import('@kdence-client/core/ui').then((m) => m.CoreUiModule),
       },
       {
+        path: 'tasks',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('@kdence-client/tasks/features').then(
+            (m) => m.TasksFeaturesModule
+          ),
+      },
+      {
         path: 'goals',
         canActivate: [AuthGuard],
         loadChildren: () =>

@@ -91,6 +91,21 @@ export class TasksEffects {
       )
     )
   );
+
+  fetchHouseholdsTasks$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TasksActions.fetchAllTasks),
+      switchMap(({ user }) =>
+        this.tasksService.fetchTasks(user.id).pipe(
+          map((tasks) => TasksActions.fetchAllTasksSuccess({ tasks })),
+          catchError((error) =>
+            of(TasksActions.fetchAllTasksFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private readonly actions$: Actions,
     private tasksService: TasksService,

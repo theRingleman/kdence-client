@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import * as TasksActions from './tasks.actions';
 import * as TasksSelectors from './tasks.selectors';
 import { CreateTaskDto, TasksEntity } from '@kdence-client/tasks/models';
+import { UsersEntity } from '@kdence-client/users/data-access';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class TasksFacade {
   selectedCore$ = this.store.pipe(select(TasksSelectors.getSelected));
   loadedTasks$ = this.store.pipe(select(TasksSelectors.getAllTasks));
   selectedGoalTasks$ = this.store.pipe(select(TasksSelectors.getGoalsTasks));
+  allTasks$ = this.store.pipe(select(TasksSelectors.getFetchedTasks));
 
   constructor(private readonly store: Store) {}
 
@@ -69,5 +71,9 @@ export class TasksFacade {
 
   deleteTask(goalId: number, task: TasksEntity) {
     this.store.dispatch(TasksActions.deleteTask({ goalId, taskId: task.id }));
+  }
+
+  fetchAllTasks(user: UsersEntity) {
+    this.store.dispatch(TasksActions.fetchAllTasks({ user }));
   }
 }

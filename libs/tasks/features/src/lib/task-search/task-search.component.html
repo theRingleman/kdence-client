@@ -1,0 +1,9 @@
+<kdence-client-single-column-layout>
+  <div class='search-bar-wrapper'>
+    <mat-form-field appearance="fill" >
+      <mat-label>Search</mat-label>
+      <input (change)='search()' [formControl]='searchText' matInput placeholder="...">
+    </mat-form-field>
+  </div>
+  <kdence-client-task-list *ngIf='tasks$ | async as tasks' [tasks]='tasks'></kdence-client-task-list>
+</kdence-client-single-column-layout>

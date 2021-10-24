@@ -15,6 +15,7 @@ export interface State extends EntityState<TasksEntity> {
   goalTasks: GoalTasks;
   selectedGoalId?: number;
   fetchedTask: TasksEntity | null;
+  householdsTasks: TasksEntity[];
 }
 
 export interface TasksPartialState {
@@ -29,6 +30,7 @@ export const initialState: State = tasksAdapter.getInitialState({
   loaded: false,
   goalTasks: {},
   fetchedTask: null,
+  householdsTasks: [],
 });
 
 const tasksReducer = createReducer(
@@ -52,6 +54,10 @@ const tasksReducer = createReducer(
   on(TasksActions.fetchTaskSuccess, (state, { task }) => ({
     ...state,
     fetchedTask: { ...task },
+  })),
+  on(TasksActions.fetchAllTasksSuccess, (state, { tasks }) => ({
+    ...state,
+    householdsTasks: [...tasks],
   }))
 );
 

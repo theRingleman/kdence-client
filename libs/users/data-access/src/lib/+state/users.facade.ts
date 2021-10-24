@@ -7,9 +7,8 @@ import { getUsersLoaded } from './users.selectors';
 import { JwtService } from '@kdence-client/core/data-access';
 import { CreateUserDto, Role, UsersEntity } from './users.models';
 import { filter, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UsersFacade {
   /**
    * Combine pieces of state using createSelector,

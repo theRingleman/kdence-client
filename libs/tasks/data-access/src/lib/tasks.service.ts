@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tasksRoute } from '@kdence-client/core/constants';
+import { BASE_APP_URL, tasksRoute } from '@kdence-client/core/constants';
 import { Observable } from 'rxjs';
 import { CreateTaskDto, Task, TasksEntity } from '@kdence-client/tasks/models';
 
@@ -9,6 +9,10 @@ import { CreateTaskDto, Task, TasksEntity } from '@kdence-client/tasks/models';
 })
 export class TasksService {
   constructor(private http: HttpClient) {}
+
+  fetchTasks(userId: number): Observable<TasksEntity[]> {
+    return this.http.get<TasksEntity[]>(`${BASE_APP_URL}/search/tasks`);
+  }
 
   fetchTasksForGoal(goalId: number): Observable<TasksEntity[]> {
     return this.http.get<TasksEntity[]>(tasksRoute(goalId));

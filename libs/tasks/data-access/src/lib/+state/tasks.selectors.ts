@@ -51,3 +51,8 @@ export const getFetchedTask = createSelector(
   getTasksState,
   (state: State) => state.fetchedTask
 );
+
+export const getFetchedTasks = createSelector(
+  getTasksState,
+  (state: State) => state.householdsTasks
+);

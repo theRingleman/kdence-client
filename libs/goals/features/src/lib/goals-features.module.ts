@@ -32,7 +32,6 @@ import { TasksDataAccessModule } from '@kdence-client/tasks/data-access';
     GoalsUiModule,
     MatIconModule,
     GoalsDataAccessModule,
-    TasksFeaturesModule,
     TasksDataAccessModule,
     TasksUiModule,
   ],

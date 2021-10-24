@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { CreateTaskDto, Task, TasksEntity } from '@kdence-client/tasks/models';
+import { UsersEntity } from '@kdence-client/users/data-access';
 
 export const init = createAction('[Tasks Page] Init');
 
@@ -103,5 +104,20 @@ export const deleteTaskSuccess = createAction(
 
 export const deleteTaskFailure = createAction(
   '[Tasks/API] Delete Task Failure',
+  props<{ error: any }>()
+);
+
+export const fetchAllTasks = createAction(
+  '[Tasks/API] Fetch All Tasks',
+  props<{ user: UsersEntity }>()
+);
+
+export const fetchAllTasksSuccess = createAction(
+  '[Tasks/API] Fetch All Tasks Success',
+  props<{ tasks: TasksEntity[] }>()
+);
+
+export const fetchAllTasksFailure = createAction(
+  '[Tasks/API] Fetch All Tasks Failure',
   props<{ error: any }>()
 );
