@@ -1,5 +1,5 @@
-// export const BASE_APP_URL = 'https://kdence.herokuapp.com';
-export const BASE_APP_URL = 'http://localhost:3000';
+export const BASE_APP_URL = 'https://kdence.herokuapp.com';
+// export const BASE_APP_URL = 'http://localhost:3000';
 export const profileRoute = (): string => `${BASE_APP_URL}/profile`;
 export const loginRoute = (): string => `${BASE_APP_URL}/auth/login`;
 export const householdsRoute = (): string => `${BASE_APP_URL}/households`;
