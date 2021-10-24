@@ -36,7 +36,7 @@ export class TaskSearchComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.tasksFacade.allTasks$
+    this.tasksSubscription = this.tasksFacade.allTasks$
       .pipe(
         tap((tasks) => {
           this.taskSet = tasks;
