@@ -1,1 +1,36 @@
-<p>active-goals-report works!</p>
+<table mat-table [dataSource]="activeGoals">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="item">
+    <th mat-header-cell *matHeaderCellDef> Item </th>
+    <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="earnedValue">
+    <th mat-header-cell *matHeaderCellDef> Total Earned So Far </th>
+    <td mat-cell *matCellDef="let element"> {{element.earnedValue / 100 | currency}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="ownedBy">
+    <th mat-header-cell *matHeaderCellDef> Owned By </th>
+    <td mat-cell *matCellDef="let element"> {{ element.user.firstName }} {{element.user.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="completionDate">
+    <th mat-header-cell *matHeaderCellDef> Percent Complete </th>
+    <td mat-cell *matCellDef="let element"> {{getPercentComplete(element) | percent}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

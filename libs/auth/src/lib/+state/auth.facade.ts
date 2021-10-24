@@ -24,7 +24,8 @@ export class AuthFacade {
       if (error instanceof HttpErrorResponse) {
         this.snackBar.open(
           'Invalid username or password, please try again.',
-          'Dismiss'
+          'Dismiss',
+          { duration: 5000 }
         );
       } else {
         this.snackBar.open('Please login.', 'Dismiss', { duration: 5000 });

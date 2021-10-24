@@ -2,7 +2,6 @@ import {
   Component,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  EventEmitter,
 } from '@angular/core';
 import {
   CreateUserDto,

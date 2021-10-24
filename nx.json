@@ -83,6 +83,9 @@
       "tags": [],
       "implicitDependencies": ["kdence-client"]
     },
+    "reports-features": {
+      "tags": []
+    },
     "reports-ui": {
       "tags": []
     },

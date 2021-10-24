@@ -26,7 +26,7 @@ export class GoalsService {
   }
 
   fetchCompletedGoals(householdId: number) {
-    return this.fetchGoals(householdId, 'complete');
+    return this.fetchGoals(householdId, 'completed');
   }
 
   createGoal(

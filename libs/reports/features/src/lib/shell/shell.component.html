@@ -1,0 +1,13 @@
+<kdence-client-single-column-layout>
+  <mat-card>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link routerLink='tasks/complete'>Complete Tasks</a>
+      <a mat-tab-link routerLink='tasks/approved'>Approved Tasks</a>
+      <a mat-tab-link routerLink='goals/active'>Active Goals</a>
+      <a mat-tab-link routerLink='goals/completed'>Completed Goals</a>
+    </nav>
+    <mat-card-content>
+      <router-outlet></router-outlet>
+    </mat-card-content>
+  </mat-card>
+</kdence-client-single-column-layout>

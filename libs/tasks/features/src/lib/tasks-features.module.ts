@@ -16,7 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedUiModule,
     TasksUiModule,
-    // RouterModule.forChild([{ path: '', component: TaskSearchComponent }]),
     RouterModule.forChild([{ path: '', component: TaskSearchComponent }]),
     MatFormFieldModule,
     MatInputModule,

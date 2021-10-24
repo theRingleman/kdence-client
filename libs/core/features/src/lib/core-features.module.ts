@@ -46,6 +46,14 @@ const routes: Routes = [
             (m) => m.GoalsFeaturesModule
           ),
       },
+      {
+        path: 'reports',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('@kdence-client/reports/features').then(
+            (module) => module.ReportsFeaturesModule
+          ),
+      },
     ],
   },
 ];

@@ -5,10 +5,12 @@ import * as GoalsActions from './goals.actions';
 import * as GoalsFeature from './goals.reducer';
 import * as GoalsSelectors from './goals.selectors';
 import { CreateGoalDto, GoalsEntity } from '@kdence-client/goals/models';
-import { filter, first, map, switchMap, switchMapTo } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GoalsFacade {
   /**
    * Combine pieces of state using createSelector,
