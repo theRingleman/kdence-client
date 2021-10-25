@@ -32,7 +32,7 @@ export class ActiveGoalsReportComponent implements OnInit, OnDestroy {
   constructor(private goalsFacade: GoalsFacade) {}
 
   getPercentComplete(element: GoalsEntity): number {
-    const percent = element.completionValue / element.earnedValue;
+    const percent = element.earnedValue / element.completionValue;
     if (!isFinite(percent)) {
       return 0;
     }
